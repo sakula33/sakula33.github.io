@@ -8,7 +8,7 @@
     <link href="/2024/12/03/houmen/"/>
     <url>/2024/12/03/houmen/</url>
     
-    <content type="html"><![CDATA[<p>一.需要用到的工具</p><p>D盾&#x2F;火绒安全</p><p>二.1.后门查杀</p><p>下载文件，用火绒安全进行查杀</p><p><img src="/images/1.png" alt="123"></p><p>点开这个病毒文件，用记事本打开，发现里面有一串md5加密的字符串，推测这个就是我们要找的flag，发现成功提交</p><p><img src="/images/2.png" alt="2"></p><p>flag为</p><p>flag{6ac45fb83b3bc355c024f5034b947dd3}</p><p>2.webshell后门</p><p>和前一题一样下载文件用火绒进行查杀</p><p><img src="/images/3.png" alt="3"></p><p>查找到两个后门病毒，打开进行查看</p><p><img src="/images/4.png" alt="4"></p><p>发现一段md5加密的字符串，推测这个就是flag</p><p>flag{ba8e6c6f35a53933b871480bb9a9545c}</p><p>三.总结</p><p>通过这两个题，学会了使用D盾&#x2F;火绒进行后门类的题目</p>]]></content>
+    <content type="html"><![CDATA[<p>一.需要用到的工具</p><p>D盾&#x2F;火绒安全</p><p>二.1.后门查杀</p><p>下载文件，用火绒安全进行查杀</p><p><img src="/images/1.png" alt="123"></p><p>点开这个病毒文件，用记事本打开，发现里面有一串md5加密的字符串，推测这个就是我们要找的flag，发现成功提交</p><p><img src="/images/2.png" alt="2"></p><p>flag为</p><p>flag{6ac45fb83b3bc355c024f5034b947dd3}</p><p>2.webshell后门</p><p>和前一题一样下载文件用火绒进行查杀</p><p><img src="/images/3.png" alt="3"></p><p>查找到两个后门病毒，打开进行查看</p><p>![4images&#x2F;4.png)</p><p>发现一段md5加密的字符串，推测这个就是flag</p><p>flag{ba8e6c6f35a53933b871480bb9a9545c}</p><p>三.总结</p><p>通过这两个题，学会了使用D盾&#x2F;火绒进行后门类的题目</p>]]></content>
     
     
     <categories>

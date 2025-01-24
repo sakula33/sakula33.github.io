@@ -4,11 +4,24 @@
   
   
   <entry>
-    <title>学习笔记</title>
+    <title>sandbox</title>
+    <link href="/2025/01/24/sandbox/"/>
+    <url>/2025/01/24/sandbox/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>学习笔记 day1</title>
     <link href="/2025/01/22/111/"/>
     <url>/2025/01/22/111/</url>
     
-    <content type="html"><![CDATA[<p>今天开始记录学习日常，今天学习html</p><h1>一.简介</h1><p>HTML 是用来描述网页的一种语言。<br>HTML 指的是超文本标记语言: HyperText Markup Language<br>HTML 不是一种编程语言，而是一种标记语言<br>标记语言是一套标记标签 (markup tag)<br>HTML 使用标记标签来描述网页<br>HTML 文档包含了HTML 标签及文本内容<br>HTML文档也叫做 web 页面</p><p>这是一段实例<br><img src="/images/html1.png"></p><h1>二.HTML基础</h1>HTML分为四个基础部分<h2>1.HTML标题</h2>HTML标题是通过< h1>--< h6>标签来进行定义的,并且通过这种形式结束该语句<p>实例<br>&lt; h1&gt;这是一个标题&lt; &#x2F;h1&gt;<br>&lt; h2&gt;这是第二个标题&lt; &#x2F;h2&gt;</p><h2>2.HTML段落</h2>HTML段落是通过标签< p>来定义的，同样用< /p>这种形式来结束该语句<p>实例<br>&lt; p&gt;这是一个段落&lt; &#x2F;p&gt;<br>&lt; p&gt;这是另一个段落&lt; &#x2F;p&gt;</p><h2>3.HTML连接</h2>HTML连接是通过< a>来定义的语句形式是< a href="www.---">这是一个连接<p>实例<br>&lt; a href&#x3D;”<a href="https://www.qfnu.edu.cn/%22%3E%E8%BF%99%E6%98%AF%E6%9B%B2%E9%98%9C%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6%E7%9A%84%E5%AE%98%E7%BD%91%E8%BF%9E%E6%8E%A5">https://www.qfnu.edu.cn/&quot;&gt;这是曲阜师范大学的官网连接</a>&lt; &#x2F;a&gt;</p><h2>4,HTML图像</h2>HTML图像是通过标签<img>来定义的<p>实例<br>&lt; img src&#x3D;”&#x2F;images&#x2F;logo.png” width&#x3D;”258” height&#x3D;”39” &#x2F;&gt;</p><p>注意图像的名称和尺寸是以属性的形式提供的！！！</p>]]></content>
+    <content type="html"><![CDATA[<p>今天开始记录学习日常，今天学习html</p><h1>一.简介</h1><p>HTML 是用来描述网页的一种语言。<br>HTML 指的是超文本标记语言: HyperText Markup Language<br>HTML 不是一种编程语言，而是一种标记语言<br>标记语言是一套标记标签 (markup tag)<br>HTML 使用标记标签来描述网页<br>HTML 文档包含了HTML 标签及文本内容<br>HTML文档也叫做 web 页面</p><p>这是一段实例<br><img src="/images/html/html1.png"></p><h1>二.HTML基础</h1>HTML分为四个基础部分<h2>1.HTML标题</h2>HTML标题是通过< h1>--< h6>标签来进行定义的,并且通过这种形式结束该语句<p>实例<br>&lt; h1&gt;这是一个标题&lt; &#x2F;h1&gt;<br>&lt; h2&gt;这是第二个标题&lt; &#x2F;h2&gt;</p><h2>2.HTML段落</h2>HTML段落是通过标签< p>来定义的，同样用< /p>这种形式来结束该语句<p>实例<br>&lt; p&gt;这是一个段落&lt; &#x2F;p&gt;<br>&lt; p&gt;这是另一个段落&lt; &#x2F;p&gt;</p><h2>3.HTML连接</h2>HTML连接是通过< a>来定义的语句形式是< a href="www.---">这是一个连接<p>实例<br>&lt; a href&#x3D;”<a href="https://www.qfnu.edu.cn/%22%3E%E8%BF%99%E6%98%AF%E6%9B%B2%E9%98%9C%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6%E7%9A%84%E5%AE%98%E7%BD%91%E8%BF%9E%E6%8E%A5">https://www.qfnu.edu.cn/&quot;&gt;这是曲阜师范大学的官网连接</a>&lt; &#x2F;a&gt;</p><h2>4,HTML图像</h2>HTML图像是通过标签<img>来定义的<p>实例<br>&lt; img src&#x3D;”&#x2F;images&#x2F;logo.png” width&#x3D;”258” height&#x3D;”39” &#x2F;&gt;</p><p>注意图像的名称和尺寸是以属性的形式提供的！！！</p>]]></content>
     
     
     <categories>

@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title>sandbox</title>
+    <title>buu-[HFCTF2020]JustEscape wp</title>
     <link href="/2025/01/24/sandbox/"/>
     <url>/2025/01/24/sandbox/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>这是一道Node,js沙盒逃逸的题目，根据大佬们的wp做的，记录一下做题的过程以及学习到的相应的知识点</p><h1>信息查看</h1><p>打开环境:</p><p><img src="/images/sandbox/sand1.png"></p><p>可以看到里面有一些提示，比如说 真的是php吗</p><p>打开&#x2F;run.php进行查看发现里面有一个eval()函数</p><p><img src="/images/sandbox/sand2.png"></p><p>这个函数除了php中有，Node.js中也含有这个函数，结合提示信息推测应该是Node.js。于是尝试利用Error().stack来进行查看<br>页面回显了一堆报错信息</p><p><img src="/images/sandbox/sand3.png"></p><p>根据这些信息可以推断这道题目是一个vm的沙盒逃逸</p><p>那么接下来把demo的那个请求参数放到url中进行查看。</p><p><img src="/images/sandbox/sand4.png"></p><p>发现没有回显，那么推测就是可能有黑名单检测机制，尝试输入其他的node.js语句，发现一下字符串被列入了黑名单</p><ol>  <li> ' </li>  <li> " </li>  <li> + </li>  <li> process </li>  <li> constructor </li>  <li> exec </li></ol><h1>bypass 黑名单机制</h1><p>首先是单引号或者双引号，我的代码需要用到它们，但都被禁用了，我选择用 &#96;&#96; 代替单双引号声明字符串。</p><p>process、constructor 和 exec 都是被用于命名方法或者属性的标识符，它们本身不是字符串，但是由于在 JavaScript 中，除了可以通过 . 访问属性和方法，还可以通过中括号 [] 访问，中括号里面是方法或属性的字符串名称</p><p>对于黑名单中的字符串我们可以用concat连接字符串</p><p>绕过的形式类似于a[<code>proces</code>.concat(<code>s</code>)]</p><h1>绕过沙盒执行系统的命令</h1><p>根据之前的Error().stack报错信息进行查看发现vm2的模块</p><p>在snyk网站上找到poc</p><p><img src="/images/sandbox/sand5.png"></p><p>根据之前得到得到各种信息在本地进行一下修改</p><p><img src="/images/sandbox/sand6.png"></p><p>主要是将黑名单的字符串进行了修改。修改完成之后将代码复制到地址栏中访问</p><p><img src="/images/sandbox/sand7.png"></p><p>这样就得到了flag</p><h1>总结</h1>根据这道题目学会了沙盒逃逸的一些简单的知识点，以及一些js的知识<p>Javascript声明字符串的几种方式：</p><ol>  <li>单引号 ' </li>  <li>双引号 " </li>  <li>反引号 ` </li>  <li>Buffer.form()</li>  <li>正则表达式，然后 toString() 得到字符串，再 substring() 去掉左右的 /，例如： /apple/.toString().substring(1,6)</li></ol><p>JavaScript拼接字符串的方式：</p><ol>  <li>加号 +</li>  <li>String.concat()方。如'pronces.concat('s')</li><ol><p>JavaScript可以用点号或者中括号访问属性的方法：</p><ol>  <li>this.constuctor</li>  <li>this['constructor']</li><ol><p>Error 对象的 stack 属性可以返回调用栈，包括程序文件的路径，利用这点查看用的哪个沙盒模块。</p><p>其他的知识点暂时需要深入学习。</p></ol></ol></ol></ol>]]></content>
     
     
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
     
   </entry>
   

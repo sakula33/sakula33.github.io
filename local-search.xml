@@ -58,7 +58,7 @@
     <link href="/2025/02/06/ssti-shrine/"/>
     <url>/2025/02/06/ssti-shrine/</url>
     
-    <content type="html"><![CDATA[<p>这是训练赛中的一道题，同时也是buu中的一道题在这里一块进行记录</p><p>打开靶机，发现直接给了我们源码</p><p><img src="/images/shrine/1.png"></p><p>通过代码，我们可以访问一下shrine路径，看看是否有ssti漏洞。测试一下 构造shrine&#x2F;9</p><p><img src="/images/shrine/2.png"></p><p>发现3*3被计算出来的，说明这里有ssti漏洞</p><p>我们可以使用查看一下配置文件，这样也可以看到app.config也就可以看到。</p><p>不过经过了尝试之后发现这道题中设置了黑名单,其中有config。</p><p>但是在python里，有很多内置函数，其中就有一个url_for函数，其作用就是给指定的函数构造URL。</p><p>配合globals()，该函数会以字典类型返回了当前位置的全部全局变量。</p><p>通过这种方式也可以实现查看的效果。</p><p>构造playload: shrine&#x2F; </p><p><img src="/images/shrine/3.png"></p><p>在其中你就可以发现，里面有一个current_app’:&lt;Flask’app’&gt;</p><p><img src="/images/shrine/4.png"></p><p>这里的current就是就是指的是当前的app，这样我们只需要查看这个config就可以查看到flag了</p><p>那么构造：</p><p>shrine&#x2F; </p><p><img src="/images/shrine/5.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>这是训练赛中的一道题，同时也是buu中的一道题在这里一块进行记录</p><p>打开靶机，发现直接给了我们源码</p><p><img src="/images/shrine/1.png"></p><p>通过代码，我们可以访问一下shrine路径，看看是否有ssti漏洞。测试一下 构造shrine&#x2F;9</p><p><img src="/images/shrine/2.png"></p><p>发现3*3被计算出来的，说明这里有ssti漏洞</p><p>我们可以使用查看一下配置文件，这样也可以看到app.config也就可以看到。</p><p>不过经过了尝试之后发现这道题中设置了黑名单,其中有config。</p><p>但是在python里，有很多内置函数，其中就有一个url_for函数，其作用就是给指定的函数构造URL。</p><p>配合globals()，该函数会以字典类型返回了当前位置的全部全局变量。</p><p>通过这种方式也可以实现查看的效果。</p><p>构造playload: </p><p><img src="/images/shrine/7.png"></p><p><img src="/images/shrine/3.png"></p><p>在其中你就可以发现，里面有一个current_app’:&lt;Flask’app’&gt;</p><p><img src="/images/shrine/4.png"></p><p>这里的current就是就是指的是当前的app，这样我们只需要查看这个config就可以查看到flag了</p><p>那么构造playload：</p><p><img src="/images/shrine/6.png"></p><p><img src="/images/shrine/5.png"></p>]]></content>
     
     
     <categories>

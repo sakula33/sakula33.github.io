@@ -1,0 +1,1136 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sakula33">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="今天这个篇章用来记录在buu平台上做的题，记录wp [极客大挑战 2019]EasySQL  打开靶机，查看题目  查看源代码只有一个登录框首先尝试测试是单引号闭合还是双引号闭合先尝试双引号闭合，发现没有报错  再尝试单引号闭合，发现查询语句报错，说明数据库是单引号闭合  尝试构建万能语句绕过验证，使用单引号型的万能密码  最后得到flag  [极客大挑战 2019]Havefun  首先打开靶机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buu-wp（web）">
+<meta property="og:url" content="https://sakula33.github.io/2025/02/07/buu-wp/index.html">
+<meta property="og:site_name" content="sakula33">
+<meta property="og:description" content="今天这个篇章用来记录在buu平台上做的题，记录wp [极客大挑战 2019]EasySQL  打开靶机，查看题目  查看源代码只有一个登录框首先尝试测试是单引号闭合还是双引号闭合先尝试双引号闭合，发现没有报错  再尝试单引号闭合，发现查询语句报错，说明数据库是单引号闭合  尝试构建万能语句绕过验证，使用单引号型的万能密码  最后得到flag  [极客大挑战 2019]Havefun  首先打开靶机">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/2.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/3.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/4.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/5.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/6.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/7.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/8.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/9.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/10.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/11.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/12.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/13.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/14.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/15.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/16.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/17.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/18.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/19.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/20.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/21.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/22.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/23.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/24.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/25.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/26.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/27.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/28.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/29.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/30.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/31.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/32.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/33.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/34.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/35.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/36.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/37.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/38.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/39.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/40.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/41.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/42.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/43.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/44.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/45.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/46.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/47.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/48.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/49.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/50.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/51.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/52.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/53.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/54.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/55.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/56.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/57.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/58.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/59.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/60.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/61.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/62.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/63.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/64.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/65.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/66.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/67.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/68.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/69.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/70.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/71.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/72.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/73.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/74.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/75.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/76.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/77.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/78.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/79.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/80.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/81.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/82.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/83.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/84.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/85.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/86.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/87.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/88.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/89.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/90.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/91.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/92.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/93.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/94.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/95.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/96.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/97.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/98.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/99.png">
+<meta property="og:image" content="https://sakula33.github.io/images/buu-wp(web)/100.png">
+<meta property="article:published_time" content="2025-02-07T14:13:11.000Z">
+<meta property="article:modified_time" content="2025-02-08T13:52:13.877Z">
+<meta property="article:author" content="sakula33">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sakula33.github.io/images/buu-wp(web)/1.png">
+  
+  
+  
+  <title>buu-wp（web） - sakula33</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+<link rel="stylesheet" href="/css/cloudedGlass.css">
+<link rel="stylesheet" href="/css/scrollAnimation.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"sakula33.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"k6Kc2Msy4c1BsggEXdXgz5HS-gzGzoHsz","app_key":"yVILF11Ufal5cJBaFFR2IziX","server_url":null,"path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong class="navbar-title">sakula&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="buu-wp（web）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-07 22:13" pubdate>
+          2025年2月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">buu-wp（web）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>今天这个篇章用来记录在buu平台上做的题，记录wp</p>
+<h1>[极客大挑战 2019]EasySQL</h1>
+
+<p>打开靶机，查看题目</p>
+<p><img src="/images/buu-wp(web)/1.png" srcset="/img/loading.gif" lazyload></p>
+<p>查看源代码只有一个登录框<br>首先尝试测试是单引号闭合还是双引号闭合<br>先尝试双引号闭合，发现没有报错</p>
+<p><img src="/images/buu-wp(web)/2.png" srcset="/img/loading.gif" lazyload></p>
+<p>再尝试单引号闭合，发现查询语句报错，说明数据库是单引号闭合</p>
+<p><img src="/images/buu-wp(web)/3.png" srcset="/img/loading.gif" lazyload></p>
+<p>尝试构建万能语句绕过验证，使用单引号型的万能密码</p>
+<p><img src="/images/buu-wp(web)/4.png" srcset="/img/loading.gif" lazyload></p>
+<p>最后得到flag</p>
+<p><img src="/images/buu-wp(web)/5.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[极客大挑战 2019]Havefun</h1>
+
+<p>首先打开靶机，摁f12查看源代码</p>
+<p><img src="/images/buu-wp(web)/6.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果cat&#x3D;dog则会输出’syc{cat_cat_cat}’<br>构建&#x2F;？cat&#x3D;dog</p>
+<p><img src="/images/buu-wp(web)/7.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到flag.</p>
+<h1>[ACTF2020 新生赛]Include</h1>
+
+<p>先摁f12查看源代码，发现一个flag.php文件</p>
+<p><img src="/images/buu-wp(web)/8.png" srcset="/img/loading.gif" lazyload></p>
+<p>Include类题目使用php伪协议</p>
+<p><img src="/images/buu-wp(web)/9.png" srcset="/img/loading.gif" lazyload></p>
+<p>用base64解码<br>Playload<br>&#x2F;?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php<br>得到<br>PD9waHAKZWNobyAiQ2FuIHlvdSBmaW5kIG91dCB0aGUgZmxhZz8iOwovL2ZsYWd7M2U0MmQwYWUtMDU2OC00MmQ1LTllYjktNzkwZTU4ODMxNTIxfQo&#x3D;<br>使用base64进行解码得到flag</p>
+<p><img src="/images/buu-wp(web)/10.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[GXYCTF2019]Ping Ping Ping</h1>
+打开靶机
+
+<p><img src="/images/buu-wp(web)/11.png" srcset="/img/loading.gif" lazyload></p>
+<p>让我们提交一个ip，题目是ping，所以我们ping一下本机地址127.0.0.1在用管道符，加上ls命令</p>
+<p><img src="/images/buu-wp(web)/12.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/buu-wp(web)/13.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到两个php文件名，尝试cat flag.php</p>
+<p><img src="/images/buu-wp(web)/14.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现空格被过滤了，进行空格绕过，以下方式可以绕过空格</p>
+<p><img src="/images/buu-wp(web)/15.png" srcset="/img/loading.gif" lazyload></p>
+<p>经过尝试发现$IFS$1可以绕过，构造playload<br>&#x2F;?ip&#x3D;127.0.0.1;ca他$IFS$1flag<br>结果发现flag也被过滤了</p>
+<p><img src="/images/buu-wp(web)/16.png" srcset="/img/loading.gif" lazyload></p>
+<p>那就查看一下index.php</p>
+<p><img src="/images/buu-wp(web)/17.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行一下代码审计，发现很多符号都过被过滤了，但是发现有一个a变量可以进行替换<br>所以构造playload&#x2F;?ip&#x3D;127.0.0.1;a&#x3D;g;cat$IFS$1\fla$a.php</p>
+<p><img src="/images/buu-wp(web)/18.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到flag</p>
+<h1>[SUCTF 2019]EasySQL</h1>
+
+<p>打开靶场，首先尝试万能密码，发现不能通过，那么尝试堆叠注入，发现可以进行<br>首先查询数据库</p>
+<p><img src="/images/buu-wp(web)/19.png" srcset="/img/loading.gif" lazyload></p>
+<p>查询表名</p>
+<p><img src="/images/buu-wp(web)/20.png" srcset="/img/loading.gif" lazyload></p>
+<p>直接查询flag发现不行</p>
+<p><img src="/images/buu-wp(web)/21.png" srcset="/img/loading.gif" lazyload></p>
+<p>回显为nonono<br>查看一下大佬们的wp。这里大佬猜测的查询语句为：<br>select $_GET[‘query’] || flag from flag<br>这里的||在mysql中表示或，如果前一个操作数为真，则不看后面的语句，然后构造payload<br>  *,1</p>
+<p><img src="/images/buu-wp(web)/22.png" srcset="/img/loading.gif" lazyload></p>
+<p>最后得到flag，向大佬学习</p>
+<p><img src="/images/buu-wp(web)/23.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[强网杯 2019]随便注</h1>
+判断闭合方式
+先传入一个1
+
+<p><img src="/images/buu-wp(web)/24.png" srcset="/img/loading.gif" lazyload></p>
+<p>再传入1’</p>
+<p><img src="/images/buu-wp(web)/25.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以判断是单引号闭合<br>2.判断有没有过滤，输入一个select</p>
+<p><img src="/images/buu-wp(web)/26.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现select|update|delete|drop|insert|where这些词被过滤了<br>那么首先尝试堆叠注入<br>1’;show databases– q</p>
+<p><img src="/images/buu-wp(web)/27.png" srcset="/img/loading.gif" lazyload></p>
+<p>再尝试爆表名<br>1’;show tables– q</p>
+<p><img src="/images/buu-wp(web)/28.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现有两个表，我们依次进行尝试<br>首先尝试1’;show columns from ‘words’– q</p>
+<p><img src="/images/buu-wp(web)/29.png" srcset="/img/loading.gif" lazyload></p>
+<p>再尝试1’; show columns from <code>1919810931114514</code>– q</p>
+<p><img src="/images/buu-wp(web)/30.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现了flag</p>
+<p><img src="/images/buu-wp(web)/31.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[极客大挑战 2019]Secret File</h1>
+
+<p><img src="/images/buu-wp(web)/32.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开靶场并没有发现有效的信息，摁f12查看</p>
+<p><img src="/images/buu-wp(web)/33.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现一个&#x2F;Archibe.rppm.php，点开看看</p>
+<p><img src="/images/buu-wp(web)/34.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击按钮发现没有信息，抓包一下看看</p>
+<p><img src="/images/buu-wp(web)/35.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现了一个被诠释的php文件点开看看</p>
+<p><img src="/images/buu-wp(web)/36.png" srcset="/img/loading.gif" lazyload></p>
+<p>开始代码审计，运用PHP伪协议构造filter伪协议</p>
+<p><img src="/images/buu-wp(web)/37.png" srcset="/img/loading.gif" lazyload></p>
+<p>看到出现的字符串是以&#x3D;结尾的，推测应该是base64编码</p>
+<p><img src="/images/buu-wp(web)/38.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终得到flag</p>
+<h1>[极客大挑战 2019]Http</h1>
+
+<p>首先打开靶机，查看源码</p>
+<p><img src="/images/buu-wp(web)/39.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现一个&#x2F;Srecret.php文件打开进行查看</p>
+<p><img src="/images/buu-wp(web)/40.png" srcset="/img/loading.gif" lazyload></p>
+<p>他说你不是来自这个地址，根据题目可以想到http协议<br>进行抓包，更改Referer为这个地址</p>
+<p><img src="/images/buu-wp(web)/41.png" srcset="/img/loading.gif" lazyload></p>
+<p>查看回显，发现他说请使用Syclover浏览器，那么再伪造用户</p>
+<p><img src="/images/buu-wp(web)/42.png" srcset="/img/loading.gif" lazyload></p>
+<p>在查看回显，说你只能在本地阅读<br>那么我们可以伪造本地ip 127.0.0.1,所以我们可以利用X-Forwarded-For协议来伪造只需要在 header 添加 X-Forwarded-For:127.0.0.1，再次访问，这时得到flag</p>
+<p><img src="/images/buu-wp(web)/43.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[极客大挑战 2019]Upload</h1>
+
+<p>打开靶场</p>
+<p><img src="/images/buu-wp(web)/44.png" srcset="/img/loading.gif" lazyload></p>
+<p>文件上传类型的，先随便上传点文件进行查看回显</p>
+<p><img src="/images/buu-wp(web)/45.png" srcset="/img/loading.gif" lazyload></p>
+<p>因为是文件上传类型的先上传一个一句话木马尝试一下</p>
+<p><img src="/images/buu-wp(web)/46.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/buu-wp(web)/47.png" srcset="/img/loading.gif" lazyload></p>
+<p>上传的php格式的一句话木马病毒被过滤了，所以使用phtml格式的一句话木马病毒</p>
+<p><img src="/images/buu-wp(web)/48.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行抓包</p>
+<p><img src="/images/buu-wp(web)/49.png" srcset="/img/loading.gif" lazyload></p>
+<p>将Content-type处改为image&#x2F;jpeg，发送发现上传成功</p>
+<p><img src="/images/buu-wp(web)/50.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在需要知道文件的保存路径，一般都是&#x2F;upload，进行一下访问</p>
+<p><img src="/images/buu-wp(web)/51.png" srcset="/img/loading.gif" lazyload></p>
+<p>查看一下刚才上传的文件，发现flag</p>
+<p><img src="/images/buu-wp(web)/52.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[极客大挑战 2019]Knife</h1>
+
+<p>打开靶场看到如下信息</p>
+<p><img src="/images/buu-wp(web)/53.png" srcset="/img/loading.gif" lazyload></p>
+<p>菜刀丢了，使用中国菜刀或者中国蚁剑，在这里使用中国蚁剑</p>
+<p><img src="/images/buu-wp(web)/54.png" srcset="/img/loading.gif" lazyload></p>
+<p>添加数据，查看根目录，发现其中有flag文件，点击查看得到flag</p>
+<p><img src="/images/buu-wp(web)/55.png" srcset="/img/loading.gif" lazyload></p>
+<p>flag{cd406a44-5d93-4dc3-982b-19ca714ab97c}</p>
+<h1>[ACTF2020 新生赛]Upload</h1>
+
+<p>打开靶场，看到灯泡提交文件，先随便提交一个文件看看过滤情况</p>
+<p><img src="/images/buu-wp(web)/56.png" srcset="/img/loading.gif" lazyload></p>
+<p>看来是白名单过滤，打开brup进行抓包查看，提交文件</p>
+<p><img src="/images/buu-wp(web)/57.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现并没有抓到包，推测应该是前端认证，提交一句话木马病毒，更改后缀名，查看抓包</p>
+<p><img src="/images/buu-wp(web)/58.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行更改后缀名为php发现不行，推测还有后端验证，那么这种情况下，尝试.phtml文件绕过验证（phtml是php文件的网页解析文件）使用brup抓包一句话木马病毒，用brup进行后缀名的更改，发现最后上传成功了</p>
+<p><img src="/images/buu-wp(web)/59.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开这个链接进行查看</p>
+<p><img src="/images/buu-wp(web)/60.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现为白色证明上传成功，打开中国蚁剑，进行连接</p>
+<p><img src="/images/buu-wp(web)/61.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终在根目录中找到flag文件，得到该题的flag</p>
+<p><img src="/images/buu-wp(web)/62.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[ACTF2020 新生赛]BackupFile</h1>
+
+<p>打开靶机，backupfile的意思是备份文件的意思<br>用dirsearch扫描</p>
+<p><img src="/images/buu-wp(web)/63.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现一个index.php.bak的文件，进行下载，发现是一个代码审计</p>
+<p><img src="/images/buu-wp(web)/64.png" srcset="/img/loading.gif" lazyload></p>
+<p>最关键的是</p>
+<p>$key &#x3D; intval($key);<br>    $str &#x3D; “123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”;<br>    if($key &#x3D;&#x3D; $str) {<br>        echo $flag;</p>
+<p>因为key&#x3D;&#x3D;str是一个弱比较，所以只需要令key&#x3D;123即可<br>（在PHP中：<br>&#x3D; &#x3D; 为弱相等，即当整数和字符串类型相比较时。会先将字符串转化为整数然后再进行比较。比如a&#x3D;123和b&#x3D;123admin456进行&#x3D; &#x3D;比较时。则b只会截取前面的整数部分。即b转化成123。所以，这里的a &#x3D; &#x3D; b是返回True。）</p>
+<p>构造playload&#x2F;index.php.bak?key&#x3D;123<br>得到flag</p>
+<p><img src="/images/buu-wp(web)/65.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[RoarCTF 2019]Easy Calc</h1>
+
+<p>打开靶机</p>
+<p><img src="/images/buu-wp(web)/66.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现有WAF(Web应用防护系统（也称为：网站应用级入侵防御系统。英文：Web Application Firewall，简称： WAF）)<br>发现源码中有一个calc.php进行查看</p>
+<p><img src="/images/buu-wp(web)/67.png" srcset="/img/loading.gif" lazyload></p>
+<p>源码有过滤，这里只能输入数字不能输入英文，但是我们要查flag该怎么办</p>
+<p>正则匹配：&#x2F;m 表示多行匹配<br>PHP字符串解析特性绕过WAF<br>输入时发现num只能输入数字，输入字符无法解析。<br>PHP需要将所有参数转换为有效变量名，因此在解析查询字符串时，它会做两件事：1，删除空白字符；2，将某些字符转换为下划线（包括空格）<br>现在的变量叫“ num”，而不是“num”。但php在解析的时候，会先把空格给去掉，这样代码还能正常运行，还上传了非法字符。</p>
+<p>scandir()函数：返回指定目录中的文件和目录的数组</p>
+<p>var_dump()：输出变量的相关信息</p>
+<p>构造playload（在num变量前面加空格绕过认证，scandir(“&#x2F;“）能够扫描根目录，但过滤了&#x2F;，那么就要ascii码来绕过</p>
+<p><img src="/images/buu-wp(web)/68.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现了f1agg文件<br>那么再次构造playload得到flag</p>
+<p><img src="/images/buu-wp(web)/69.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[极客大挑战 2019]BuyFlag</h1>
+
+<p>打开靶场，查看页面，发现要求必须是学生并且必须钱够买flag<br>摁ctrl u进行查看源代码发现</p>
+<p><img src="/images/buu-wp(web)/70.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行代码审计，需要POST提交一个password参数，必须是非数字并且为404<br>进行抓包查看</p>
+<p><img src="/images/buu-wp(web)/71.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现一个user&#x3D;0将其数字进行更改，改为1时发现登录为学生</p>
+<p><img src="/images/buu-wp(web)/72.png" srcset="/img/loading.gif" lazyload></p>
+<p>以POST方式提交password参数为404a，源代码显示是一个弱比较，所以可以是成为为404并且不是数字<br>发现登录成功，那么就开始提交money参数，输入钱发现太长，少了则显示钱不足，那么尝试用数组绕过，发现可以，得到flag</p>
+<p><img src="/images/buu-wp(web)/73.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[BJDCTF2020]Easy MD5</h1>
+
+<p>首先我们打开靶场看到一个查询框，输入任何东西均无回显</p>
+<p><img src="/images/buu-wp(web)/74.png" srcset="/img/loading.gif" lazyload></p>
+<p>查看源代码，看到hint中有提示</p>
+<p><img src="/images/buu-wp(web)/75.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现是sql注入，select * from ‘admin’ where password&#x3D;md5($pass,true)<br>password返回值为“or 1”的时候为一个永真的的词条<br>看了大佬博客，这个可以用ffifdyop绕过，绕过原理是：<br>ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6<br>而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 select * from ‘admin’ where password&#x3D;’’ or ‘6xxxxx’，等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数。<br>果然，我们提交之后就绕过了这个，来到了另一个页面</p>
+<p><img src="/images/buu-wp(web)/76.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击ctrl+U查看源代码</p>
+<p><img src="/images/buu-wp(web)/77.png" srcset="/img/loading.gif" lazyload></p>
+<p>开始进行代码审计，发现以get的方式提供一个a和b，a和b的值不相等,但是a和b的MD5的值要相等<br>这里提供两个QNKCDZO和s878926199a<br>构造playload<br><a target="_blank" rel="noopener" href="http://37d8016d-643c-4764-8e62-c8a24e224a75.node3.buuoj.cn/levels91.php?a=QNKCDZO&b=s878926199a">http://37d8016d-643c-4764-8e62-c8a24e224a75.node3.buuoj.cn/levels91.php?a=QNKCDZO&amp;b=s878926199a</a></p>
+<p><img src="/images/buu-wp(web)/78.png" srcset="/img/loading.gif" lazyload></p>
+<p>来到该页面，继续进行代码审计，要用post提交两个变量，并且是强比较类型，两个变量不相等，但MD5的值要完全相等<br>MD5有个特点是：如果传入的两个参数不是字符串，而是数组，md5()函数无法解出其数值，而且不会报错，就会得到&#x3D;&#x3D;&#x3D;强比较的值相等<br>payload<br>param1[]&#x3D;1&amp;param2[]&#x3D;2即可（用数组的方式来绕过验证）</p>
+<p><img src="/images/buu-wp(web)/79.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终得到flag</p>
+<h1>[HCTF 2018]admin</h1>
+
+<p>打开靶场，发现有一个登录界面</p>
+<p><img src="/images/buu-wp(web)/80.png" srcset="/img/loading.gif" lazyload></p>
+<p>以admin为用户名进行注册，发现该用户名已经被注册了，推测该题为弱口令爆破</p>
+<p><img src="/images/buu-wp(web)/81.png" srcset="/img/loading.gif" lazyload></p>
+<p>用bp进行抓包，导入密码字典进行抓包，发送到intruder进行爆破</p>
+<p><img src="/images/buu-wp(web)/82.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现123的返回值长度不一样，那么这个就应该是密码了</p>
+<p><img src="/images/buu-wp(web)/83.png" srcset="/img/loading.gif" lazyload></p>
+<p>登录成功得到flag</p>
+<h1>[MRCTF2020]你传你🐎呢</h1>
+
+<p>打开靶机</p>
+<p><img src="/images/buu-wp(web)/84.png" srcset="/img/loading.gif" lazyload></p>
+<p>先上传一个一句话木马<?php @eval($_POST['attack']) ?><br>并且抓包</p>
+<p><img src="/images/buu-wp(web)/85.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/buu-wp(web)/86.png" srcset="/img/loading.gif" lazyload></p>
+<p>上传成功，但传入的是一个jpg文件，我们需要将他转成php文件<br>所以上一个htaccess文件写入SetHandler application&#x2F;x-httpd-php</p>
+<p><img src="/images/buu-wp(web)/87.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/buu-wp(web)/88.png" srcset="/img/loading.gif" lazyload></p>
+<p>连接蚁剑</p>
+<p><img src="/images/buu-wp(web)/89.png" srcset="/img/loading.gif" lazyload></p>
+<p>在根目录下找到flag文件</p>
+<p><img src="/images/buu-wp(web)/90.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到flag</p>
+<h1>[ZJCTF 2019]NiZhuanSiWei</h1>
+
+<p>打开靶场</p>
+<p><img src="/images/buu-wp(web)/91.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行代码审计，首先第一个绕过让提交text，其值为welcome to the zjctf<br>我们可以用data伪协议来进行提交，并且以防万一进行一个base64编码<br>最终构造playload为<br>?text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,d2VsY29tZSB0byB0aGUgempjdGY&#x3D;</p>
+<p><img src="/images/buu-wp(web)/92.png" srcset="/img/loading.gif" lazyload></p>
+<p>绕过成功，进行第二个绕过，include函数，并且有useless.php的提示，所以用php:&#x2F;&#x2F;fillter伪协议进行绕过<br>构建playload<br>?text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,welcome to the zjctf&amp;file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;useless.php</p>
+<p><img src="/images/buu-wp(web)/93.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现绕过成功，对回显进行解码得到</p>
+<p><img src="/images/buu-wp(web)/94.png" srcset="/img/loading.gif" lazyload></p>
+<p>在本地进行序列化操作</p>
+<?php
+class Flag{  //flag.php  
+    public $file="flag.php";  
+    public function __tostring(){  
+        if(isset($this->file)){  
+            echo file_get_contents($this->file); 
+            echo "<br>";
+        return ("U R SO CLOSE !///COME ON PLZ");
+        }  
+    }  
+}  
+$a=new Flag();
+echo serialize($a);
+?>
+
+<p>序列化后得到</p>
+<p>O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<p>构造playload:<br>?text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,welcome to the zjctf&amp;file&#x3D;useless.php&amp;password&#x3D;O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<p><img src="/images/buu-wp(web)/95.png" srcset="/img/loading.gif" lazyload></p>
+<p>绕过成功，摁f12查看，得到flag</p>
+<p><img src="/images/buu-wp(web)/96.png" srcset="/img/loading.gif" lazyload></p>
+<h1>[MRCTF2020]Ez_bypass</h1>
+
+<p>首先打开靶场</p>
+<p><img src="/images/buu-wp(web)/97.png" srcset="/img/loading.gif" lazyload></p>
+<p>太乱了，摁ctrl+u进行查看</p>
+<p><img src="/images/buu-wp(web)/98.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行代码审计<br>首先让以GET的方式提交id和gg参数，两个参数不能相等，但md5值要相等并且是一个强比较，所以构造数组进行绕过  id[]&#x3D;1&amp;gg[]&#x3D;2</p>
+<p>查看回显发现绕过成功</p>
+<p>那么进行下一步代码审计，让以POST方式提交一个passwd参数，并且passwd不能是一个数字串，但是是一个弱类型的比较，所以我们构造passwd&#x3D;1234567a来进行绕过，首先用bp进行抓包，提交参数</p>
+<p><img src="/images/buu-wp(web)/99.png" srcset="/img/loading.gif" lazyload></p>
+<p>查看回显，发现成功，打印出了flag</p>
+<p><img src="/images/buu-wp(web)/100.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>buu-wp（web）</div>
+      <div>https://sakula33.github.io/2025/02/07/buu-wp/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sakula33</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/07/%E8%AE%AD%E7%BB%83%E8%B5%9Beasy-tornado/" title="训练赛easy_tornado">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">训练赛easy_tornado</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/06/ssti-shrine/" title="ssti-shrine">
+                        <span class="hidden-mobile">ssti-shrine</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"k6Kc2Msy4c1BsggEXdXgz5HS-gzGzoHsz","appKey":"yVILF11Ufal5cJBaFFR2IziX","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+<div>
+  <span id="timeDate">正在载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("12/1/2024 00:00:00");
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "🚀已持续航行&nbsp"+dnum+"&nbsp天";  
+      document.getElementById("times").innerHTML = hnum + "&nbsp时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/scrollAnimation.js"></script>
+<script src="/js/DynamicLine.js"></script>
+<script src="/js/sakura.js"></script>
+<script src="/js/star.js"></script>
+<script src="/js/love.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+</html>

@@ -19,23 +19,31 @@
   <meta name="author" content="sakula33">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sakula33的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签 - 原创">
-<meta property="og:url" content="https://sakula33.github.io/tags/%E5%8E%9F%E5%88%9B/index.html">
+    <meta name="description" content="1.RSA 打开文件，已知p,q,e编写脚本 得到最后的d,包上flag 2.一眼就解密 后面有等号推测是base64编码 3.MD5打开文件得到 看题目就可以知道是md5解密，用在线工具解密一下得到flag 4.Url编码 根据题目可以知道是url编码，解码得到 5.看我回旋踢打开文件得到一串看不懂的字符串，推测是凯撒密码 6.摩丝根据题目可知，摩斯电码 7.password 张三—&gt;zs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buu-wp（crypto）">
+<meta property="og:url" content="https://sakula33.github.io/2025/02/09/buu-wp%EF%BC%88crypto%EF%BC%89/index.html">
 <meta property="og:site_name" content="sakula33">
-<meta property="og:description" content="sakula33的个人博客">
+<meta property="og:description" content="1.RSA 打开文件，已知p,q,e编写脚本 得到最后的d,包上flag 2.一眼就解密 后面有等号推测是base64编码 3.MD5打开文件得到 看题目就可以知道是md5解密，用在线工具解密一下得到flag 4.Url编码 根据题目可以知道是url编码，解码得到 5.看我回旋踢打开文件得到一串看不懂的字符串，推测是凯撒密码 6.摩丝根据题目可知，摩斯电码 7.password 张三—&gt;zs">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-09T10:47:51.000Z">
+<meta property="article:modified_time" content="2025-02-18T08:17:32.394Z">
 <meta property="article:author" content="sakula33">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>标签 - 原创 - sakula33</title>
+  <title>buu-wp（crypto） - sakula33</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -105,7 +113,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -211,17 +219,53 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="标签 - 原创"></span>
+            <span id="subtitle" data-typed-text="buu-wp（crypto）"></span>
           
         </div>
 
         
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-09 18:47" pubdate>
+          2025年2月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          289 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
 
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
       
     </div>
   </div>
@@ -233,79 +277,211 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="list-group">
-  <p class="h4">共计 7 篇文章</p>
-  <hr>
-  
-  
-    
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-      <p class="h5">2025</p>
-    
-    <a href="/2025/02/18/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
-      <time>02-18</time>
-      <div class="list-group-item-title">学习日志js基础</div>
-    </a>
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">buu-wp（crypto）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>1.RSA</p>
+<p>打开文件，已知p,q,e<br>编写脚本</p>
+<p>得到最后的d,包上flag</p>
+<p>2.一眼就解密</p>
+<p>后面有等号推测是base64编码</p>
+<p>3.MD5<br>打开文件得到</p>
+<p>看题目就可以知道是md5解密，用在线工具解密一下得到flag</p>
+<p>4.Url编码</p>
+<p>根据题目可以知道是url编码，解码得到</p>
+<p>5.看我回旋踢<br>打开文件得到一串看不懂的字符串，推测是凯撒密码</p>
+<p>6.摩丝<br>根据题目可知，摩斯电码</p>
+<p>7.password</p>
+<p>张三—&gt;zs<br>密码为zs19900315<br>8.变异凯撒密码<br>凯撒密码的本质就是移位</p>
+<p>对比acsii码第一个往后移了5位，第二个往后移了6位，那我们就已经得知了规律<br>编写脚本得到flag</p>
+<p>9.Quoted-printable</p>
+<p>看题目可知quoted-printable编码<br>Quoted-Printable编码方法，适合所传输数据中，只有少量的非ASCII编码，用一个等号(&#x3D;)后面加两个数字字符来表示一个非ASCII码字符。<br>复制到在线工具当中进行解码</p>
+<p>得到flag</p>
+<p>10.篱笆墙的影子</p>
+<p>看题目推测是栅栏密码，经过解码得到flag</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2025/02/07/%E8%AE%AD%E7%BB%83%E8%B5%9Beasy-tornado/" class="list-group-item list-group-item-action">
-      <time>02-07</time>
-      <div class="list-group-item-title">训练赛easy_tornado</div>
-    </a>
   
-    
-    <a href="/2025/02/07/buu-wp/" class="list-group-item list-group-item-action">
-      <time>02-07</time>
-      <div class="list-group-item-title">buu-wp（web）</div>
-    </a>
+</div>
+
+
+              
   
-    
-    <a href="/2025/02/06/ssti-shrine/" class="list-group-item list-group-item-action">
-      <time>02-06</time>
-      <div class="list-group-item-title">ssti-shrine</div>
-    </a>
-  
-    
-    <a href="/2025/01/24/sandbox/" class="list-group-item list-group-item-action">
-      <time>01-24</time>
-      <div class="list-group-item-title">buu-[HFCTF2020]JustEscape wp</div>
-    </a>
-  
-    
-    <a href="/2025/01/22/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/" class="list-group-item list-group-item-action">
-      <time>01-22</time>
-      <div class="list-group-item-title">学习笔记 day1</div>
-    </a>
-  
-    
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>buu-wp（crypto）</div>
+      <div>https://sakula33.github.io/2025/02/09/buu-wp（crypto）/</div>
+    </div>
+    <div class="license-meta">
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/12/03/houmen/" class="list-group-item list-group-item-action">
-      <time>12-03</time>
-      <div class="list-group-item-title">后门查杀</div>
-    </a>
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sakula33</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/18/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/" title="学习日志js基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">学习日志js基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/09/buu-wp%EF%BC%88%E6%9D%82%E9%A1%B9%EF%BC%89/" title="buu-wp（杂项）">
+                        <span class="hidden-mobile">buu-wp（杂项）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
   
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"k6Kc2Msy4c1BsggEXdXgz5HS-gzGzoHsz","appKey":"yVILF11Ufal5cJBaFFR2IziX","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
 </div>
 
 
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -456,6 +632,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script defer src="/js/leancloud.js" ></script>
 

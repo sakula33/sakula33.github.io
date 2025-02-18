@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>学习日志js基础</title>
+    <link href="/2025/02/18/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/"/>
+    <url>/2025/02/18/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/</url>
+    
+    <content type="html"><![CDATA[<p>今天学习了一下js的一些基础知识在这里记录一下</p><p> 1.书写位置</p><p>1.1 内嵌式</p><p>写在html文件里，用&lt; script &gt;标签包住</p><p>下面是一个实例</p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/2.png"></p><p>1.2内联式</p><p>直接将其写到标签内部。</p><p>下面是一个实例</p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/2.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p>1.3外部式</p><p>在外部新建一个js文件，然后通过 script 标签引入到html文件当中</p><p>下面是一个实例</p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/2.png"></p><p>2.基础语法</p><p>2.1输入语句为prompt()</p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/2.png"></p><p>2.2输出语句</p><p>输出语句 document.write() 输出给用户</p><p>弹出警示框 alert()</p><p>控制台输出 console.log() 用于程序员调试</p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/2.png"></p><p><img src="/images/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/1.png"></p><p>3.变量</p><p>3.1变量的定义</p><p>变量可以理解为一个储存数据的容器</p><p>3.2变量的使用</p><p>在现在一般是使用 let 来定义一个变量<br>还有 var 也是经常被用来定义变量的</p><p>let age &#x3D; 18</p><p>var age &#x3D; 18</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaScript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>buu-wp（crypto）</title>
+    <link href="/2025/02/09/buu-wp%EF%BC%88crypto%EF%BC%89/"/>
+    <url>/2025/02/09/buu-wp%EF%BC%88crypto%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<p>1.RSA</p><p>打开文件，已知p,q,e<br>编写脚本</p><p>得到最后的d,包上flag</p><p>2.一眼就解密</p><p>后面有等号推测是base64编码</p><p>3.MD5<br>打开文件得到</p><p>看题目就可以知道是md5解密，用在线工具解密一下得到flag</p><p>4.Url编码</p><p>根据题目可以知道是url编码，解码得到</p><p>5.看我回旋踢<br>打开文件得到一串看不懂的字符串，推测是凯撒密码</p><p>6.摩丝<br>根据题目可知，摩斯电码</p><p>7.password</p><p>张三—&gt;zs<br>密码为zs19900315<br>8.变异凯撒密码<br>凯撒密码的本质就是移位</p><p>对比acsii码第一个往后移了5位，第二个往后移了6位，那我们就已经得知了规律<br>编写脚本得到flag</p><p>9.Quoted-printable</p><p>看题目可知quoted-printable编码<br>Quoted-Printable编码方法，适合所传输数据中，只有少量的非ASCII编码，用一个等号(&#x3D;)后面加两个数字字符来表示一个非ASCII码字符。<br>复制到在线工具当中进行解码</p><p>得到flag</p><p>10.篱笆墙的影子</p><p>看题目推测是栅栏密码，经过解码得到flag</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>buu-wp（杂项）</title>
     <link href="/2025/02/09/buu-wp%EF%BC%88%E6%9D%82%E9%A1%B9%EF%BC%89/"/>
     <url>/2025/02/09/buu-wp%EF%BC%88%E6%9D%82%E9%A1%B9%EF%BC%89/</url>

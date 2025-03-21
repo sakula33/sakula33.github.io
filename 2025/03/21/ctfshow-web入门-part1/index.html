@@ -1,0 +1,907 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sakula33">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！ 这篇文章是第一部分‘信息收集’，那么我们开始把！ 首先为了方便我的查看我先在这里放个小总结 小总结  源代码泄露  版本管理软件泄露： – git– svn 备份文件泄露： – index.php.swp    index.php.bak    index.php~ –www.zip 其他： – robots.txt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow-web入门-part1">
+<meta property="og:url" content="https://sakula33.github.io/2025/03/21/ctfshow-web%E5%85%A5%E9%97%A8-part1/index.html">
+<meta property="og:site_name" content="sakula33">
+<meta property="og:description" content="今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！ 这篇文章是第一部分‘信息收集’，那么我们开始把！ 首先为了方便我的查看我先在这里放个小总结 小总结  源代码泄露  版本管理软件泄露： – git– svn 备份文件泄露： – index.php.swp    index.php.bak    index.php~ –www.zip 其他： – robots.txt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1401.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1402.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1601.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1602.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1603.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1801.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1802.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/2001.png">
+<meta property="article:published_time" content="2025-03-21T09:38:22.000Z">
+<meta property="article:modified_time" content="2025-03-21T13:08:59.973Z">
+<meta property="article:author" content="sakula33">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png">
+  
+  
+  
+  <title>ctfshow-web入门-part1 - sakula33</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+<link rel="stylesheet" href="/css/cloudedGlass.css">
+<link rel="stylesheet" href="/css/scrollAnimation.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"sakula33.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"k6Kc2Msy4c1BsggEXdXgz5HS-gzGzoHsz","app_key":"yVILF11Ufal5cJBaFFR2IziX","server_url":null,"path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong class="navbar-title">sakula&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ctfshow-web入门-part1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-21 17:38" pubdate>
+          2025年3月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ctfshow-web入门-part1</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！</p>
+<p>这篇文章是第一部分‘信息收集’，那么我们开始把！</p>
+<p>首先为了方便我的查看我先在这里放个小总结</p>
+<h1 id="小总结">小总结</h1>
+<b>
+<h2 id="源代码泄露">源代码泄露</h2>
+
+<p>版本管理软件泄露：</p>
+<p>– git<br>– svn</p>
+<p>备份文件泄露：</p>
+<p>– index.php.swp<br>    index.php.bak<br>    index.php~</p>
+<p>–<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p>其他：</p>
+<p>– robots.txt</p>
+</b>
+
+<h1 id="题目">题目</h1>
+
+<h2 id="web1">web1</h2>
+
+<p>首先打开靶机进行查看，只有一句话</p>
+<p>摁一下F12即可得到flag</p>
+<h2 id="web2">web2</h2>
+
+<p>显示无法查看源代码</p>
+<p>我们在网址前面加上view-source:即可查看了</p>
+<p>或者我们使用ctrl+u的快捷方式来打开</p>
+<h2 id="web3">web3</h2>
+
+<p>看题目描述，让我们抓个包看看，那我们就使用bp抓包进行查看</p>
+<p>把他发送到repeater中，发送一下，flag就在返回的响应包中</p>
+<h2 id="web4">web4</h2>
+
+<p>看题目描述，写着robots，那么就是查看robots协议了</p>
+<p>查看之后就得到了存放flag的文件名了，进行查看就得到了flag</p>
+<h2 id="web5">web5</h2>
+
+<p>直接在查看index.phps就得到了flag了</p>
+<h2 id="web6">web6</h2>
+
+<p>看题目描述，考虑源码泄露，查看一下<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p>得到了一个压缩包，看i面一个index.php和一个f1000g,txt的文件</p>
+<p>这个txt文件就是存放flag的文件了，这样就得到了flag</p>
+<h2 id="web7">web7</h2>
+
+<p>题目描述，版本控制很重要</p>
+<p>那么可以联想到版本管理软件泄露源代码</p>
+<p>包括</p>
+<p><b> git  和  svn </b></p>
+<p>那么我们分别进行查看，当我们查看url&#x2F;.git的时候就可以的到flag了</p>
+<h2 id="web8">web8</h2>
+
+<p>题目描述和上一个题是一样的<br>‘<br>那么我们就可以查看url&#x2F;.svn就可以得到flag了</p>
+<h2 id="web9">web9</h2>
+
+<p>根据提示，在Linux生产环境上使用vim或者vi做修改时，会生成一个swp为后缀的文件</p>
+<p>第一次意外退出生成的是.swp</p>
+<p>第二次意外退出生成的是.swo</p>
+<p>第三次为.swn</p>
+<p>因此可以尝试打开第一次退出时产生的这个文件，输入url&#x2F;index.php.swp</p>
+<h2 id="web10">web10</h2>
+
+<p>查看题目提示说的是cookie中不能存放信息</p>
+<p>那么我们打开环境，直接进去查看cookie</p>
+<p>用bp抓包，这样就得到了flag</p>
+<h2 id="web11">web11</h2>
+
+<p>通过dns检查查询flag <a target="_blank" rel="noopener" href="https://zijian.aliyun.com/">https://zijian.aliyun.com/</a> TXT 记录，一般指为某个主机名或域名设置的说明。</p>
+<p>查找flag.ctfshow.com域名下的txt记录</p>
+<h2 id="web12">web12</h2>
+
+<p>首先查看robots.txt发现了admin路由，查看</p>
+<p>让我们进行登录，那么密码是什么呢，这时候我们就可以看到题目给的提示了</p>
+<p>我们在主页进行查看，发现在主页下面有一个数字，那么我们就合理怀疑这个就是密码</p>
+<p>最后发现登录成功，得到flag</p>
+<h2 id="web13">web13</h2>
+
+<p>在网站下面发现一个document</p>
+<p>进行查看发现一个后台网址和登录账号和密码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png" srcset="/img/loading.gif" lazyload></p>
+<p>登录之后得到flag</p>
+<h2 id="web14">web14</h2>
+
+<p>题目提示：有时候源码里面就能不经意间泄露重要(editor)的信息,默认配置害死人</p>
+<p>那么我们直接查看url&#x2F;editor</p>
+<p>发现是有一个上传连接，我们点进去看是目录</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1401.png" srcset="/img/loading.gif" lazyload></p>
+<p>一般默认配置都是在var&#x2F;www&#x2F;html里面找flag</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1402.png" srcset="/img/loading.gif" lazyload></p>
+<p>找到了</p>
+<h2 id="web15">web15</h2>
+
+<p>我们拿到题目之后看到最底下有一个邮箱，然后查看一下admin路由</p>
+<p>发现一个登录界面，我们首先输入admin，把这个邮箱的号码当作密码进行输入，发现不对哈</p>
+<p>那么我们就只能重置密码了</p>
+<p>发现有密保是问题是我在哪个城市</p>
+<p>我们从qq上进行搜索能发现他的所在地是在西安(但是现在搜不到了)</p>
+<p>这样我们就重置了密码哈接下来就是登录之后拿到了flag</p>
+<h2 id="web16">web16</h2>
+
+<p>先查看题目提示：对于测试用的探针，使用完毕后要及时删除，可能会造成信息泄露</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1601.png" srcset="/img/loading.gif" lazyload></p>
+<p>根据大佬的文章得知了什么是探针泄露</p>
+<p>那么我们回归到这个题，我们访问tz.php</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1602.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们在其中发现有phpinfo，那么我们接着查看一波（点击一下即可查看）</p>
+<p>最终我们也是在其中找到了flag</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1603.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="web17">web17</h2>
+
+<p>首先查看题目提示：备份的sql文件会泄露敏感信息</p>
+<p>我们用dirsearch扫描一下，发现了backup.sql文件</p>
+<p>下载，查看，得到flag</p>
+<h2 id="web18">web18</h2>
+
+<p>打开发现是一个小游戏，我们用ctrl+u来进行查看，发现有一个js文件</p>
+<p>我们查看一下代码，发现其中有一个unicode的编码，我们解码一下</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1801.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1802.png" srcset="/img/loading.gif" lazyload></p>
+<p>那么我们就查看一下101.php</p>
+<p>得到flag</p>
+<h2 id="web19">web19</h2>
+
+<p>首先我们查看题目提示：密钥什么的，就不要放在前端了</p>
+<p>估计解题的关键就是在前端了，使用ctrl+u进行查看</p>
+<p>发现了密码，我们使用post的方式进行传参就得到了flag</p>
+<h2 id="web20">web20</h2>
+
+<p>还是老样子，先查看题目提示：mdb文件是早期asp+access构架的数据库文件，文件泄露相当于数据库被脱裤了</p>
+<p>那我们还是用dirsearch来进行一下扫描</p>
+<p>最后扫描到了一个&#x2F;db&#x2F;db.mdb</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/2001.png" srcset="/img/loading.gif" lazyload></p>
+<p>进行查看发现了flag</p>
+<h1 id="总结">总结</h1>
+
+<p>通过这个模块，我学习到了很多没见过的搜集信息的方法。</p>
+<p>相信以后会更好，加油把剩下的题目都给做完！！！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ctfshow-web入门-part1</div>
+      <div>https://sakula33.github.io/2025/03/21/ctfshow-web入门-part1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sakula33</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/20/ctfshow-web/" title="ctfshow-web">
+                        <span class="hidden-mobile">ctfshow-web</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"k6Kc2Msy4c1BsggEXdXgz5HS-gzGzoHsz","appKey":"yVILF11Ufal5cJBaFFR2IziX","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+<div>
+  <span id="timeDate">正在载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("12/1/2024 00:00:00");
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "🚀已持续航行&nbsp"+dnum+"&nbsp天";  
+      document.getElementById("times").innerHTML = hnum + "&nbsp时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/scrollAnimation.js"></script>
+<script src="/js/DynamicLine.js"></script>
+<script src="/js/sakura.js"></script>
+<script src="/js/star.js"></script>
+<script src="/js/love.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+</html>

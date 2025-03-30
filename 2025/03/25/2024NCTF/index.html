@@ -19,17 +19,22 @@
   <meta name="author" content="sakula33">
   <meta name="keywords" content="">
   
-    <meta name="description" content="艰难的比赛，来跟着官方wp复现学习一下 1.sqlmap-master 首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执">
+    <meta name="description" content="艰难的比赛，来跟着官方wp复现学习一下 sqlmap-master  首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024NCTF">
 <meta property="og:url" content="https://sakula33.github.io/2025/03/25/2024NCTF/index.html">
 <meta property="og:site_name" content="sakula33">
-<meta property="og:description" content="艰难的比赛，来跟着官方wp复现学习一下 1.sqlmap-master 首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执">
+<meta property="og:description" content="艰难的比赛，来跟着官方wp复现学习一下 sqlmap-master  首先查看题目，给了附件和环境。 首先打开环境，是一个类似于sqlmap的一个界面。 附件当中给了源代码，我们查看一下。  我们发现其中有一个很明显的subprocess.Popen()函数 (1)subprocess.Popen:（subprocess.popen是python标准库中的一个模块，用于启动和管理子进程。它可以执行">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/sqlmap1.png">
 <meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/sqlmap2.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/dash1.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/dash2.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/dash3.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/dash4.png">
+<meta property="og:image" content="https://sakula33.github.io/images/2024NCTF/dash5.png">
 <meta property="article:published_time" content="2025-03-25T09:12:07.000Z">
-<meta property="article:modified_time" content="2025-03-26T10:35:37.157Z">
+<meta property="article:modified_time" content="2025-03-28T09:38:33.704Z">
 <meta property="article:author" content="sakula33">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -246,7 +251,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.6k 字
         
       </span>
     
@@ -257,7 +262,7 @@
         
         
         
-          15 分钟
+          22 分钟
         
       </span>
     
@@ -300,7 +305,8 @@
               <div class="markdown-body">
                 
                 <p>艰难的比赛，来跟着官方wp复现学习一下</p>
-<p>1.sqlmap-master</p>
+<h1 id="sqlmap">sqlmap-master</h1>
+
 <p>首先查看题目，给了附件和环境。</p>
 <p>首先打开环境，是一个类似于sqlmap的一个界面。</p>
 <p>附件当中给了源代码，我们查看一下。</p>
@@ -437,6 +443,58 @@ USER=root
 <p>后端会将输入拼接到 sqlmap 命令中，最终执行如下命令：</p>
 <p>sqlmap -u 127.0.0.1:8000 –eval <strong>import</strong>(‘os’).system(‘env’) –batch –flush-session</p>
 <p>由于 –eval 参数的存在，sqlmap 会在运行时执行我们注入的 Python 代码，从而触发命令执行。</p>
+<h1 id="ez_dash&&ez_dash_revenge">ez_dash&&ez_dash_revenge</h1>
+
+<p>首先查看题目，他提供了一个源代码和环境</p>
+<p>打开环境进行查看，发现是一个404错误的界面</p>
+<p><img src="/images/2024NCTF/dash1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="ez_dash">ez_dash</h2>
+
+<p>首先我们先看这个题</p>
+<p>那么我们查看一下源代码</p>
+<p><img src="/images/2024NCTF/dash2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="代码分析">代码分析</h3>
+
+<p>这段代码实现了一个基于 bottle 的 Web 服务，允许用户通过 HTTP 请求动态设置对象的值以及渲染模板。</p>
+<p>这段代码重要的有一个函数和两个路由</p>
+<p><b>setval函数</b></p>
+<p>用于设置全局变量的属性。</p>
+<p>接受三个参数：name（全局变量名）、path（属性路径）、value（要设置的值）。</p>
+<p>使用了 pydash.set_ 来动态设置对象的嵌套属性。</p>
+<p>包含了一些限制条件：</p>
+<p>禁止使用双下划线（__）开头的名称。</p>
+<p>禁止访问某些特定的内置对象（如 <strong>builtins</strong> 和 bottle）。</p>
+<p>禁止访问某些特定的属性路径（如 <strong>class__、__dict</strong> 等）。</p>
+<p><b>&#x2F;setValue路由</b></p>
+<p>提供一个 POST 接口，允许用户通过 HTTP 请求动态设置全局变量的属性。</p>
+<p>对输入进行了长度限制（name 长度不超过 6，path 长度不超过 32）。</p>
+<p>返回 “yes” 或 “no” 表示操作是否成功。</p>
+<p><b>&#x2F;render路由</b></p>
+<p>提供一个 GET 接口，允许用户通过 HTTP 请求渲染指定路径的模板。</p>
+<p>对路径进行了长度限制（不超过 10 个字符）。</p>
+<h3 id="题目">题目</h3>
+
+<p>这个题目预期解是bottle服务+pydash的原型链污染，然后可以通过render渲染模板。</p>
+<p>（原型链污染（Prototype Pollution） 是一种安全漏洞，它发生在 JavaScript 或 Python 等支持对象原型的语言中。这种漏洞允许攻击者通过修改对象的原型来注入或篡改属性，从而影响程序的行为。在 Python 中，这种情况通常出现在使用某些库（如 pydash）时，如果这些库没有正确处理用户输入。</p>
+<p>Pydash 与原型链污染</p>
+<p>pydash 是一个功能强大的工具库，提供了许多实用函数用于操作数据结构。然而，由于其灵活性和对动态对象的支持，如果使用不当，可能会引入原型链污染的风险。</p>
+<p>原型链污染示例<br>假设我们有一个简单的 Python 对象，并且使用 pydash.set_ 方法来设置嵌套属性：</p>
+<b>
+import pydash
+
+<p>obj &#x3D; {}<br>pydash.set_(obj, ‘<strong>proto</strong>.polluted’, ‘true’)<br></p></b><p></p>
+<p>在这个例子中，<strong>proto</strong> 是 JavaScript 中的对象原型链的关键字，但在 Python 中并没有直接对应的机制。不过，在一些情况下（例如在 Node.js 环境下），这会导致所有新创建的对象都包含 polluted 属性，因为 <strong>proto</strong> 影响了对象的原型链。</p>
+<p>尽管 Python 没有直接的 <strong>proto</strong> 概念，但类似的问题可能出现在其他上下文中，特别是当 Python 应用与前端代码交互或使用某些特定库时。）</p>
+<p>但是这个题对&#x2F;render的过滤设置的不够严谨，bottle的模板渲染功能很强大，不仅能够接受<b>&#123;&#123;&#125;&#125;&#x2F;b&gt;而且还能够接受%引入一行python代码：</b></p>
+<p><img src="/images/2024NCTF/dash3.png" srcset="/img/loading.gif" lazyload></p>
+<p>因此我们可以直接往render路由打，payload:</p>
+<p><code>% eval("<strong>import</strong>('os').popen('id>1')")</code></p>
+<p>(render能够渲染文件，因此将文件写入再用·render渲染即可)</p>
+<p>过滤了<b>.</b>，但是题目用的是eval()函数，因此我们可以用chr函数进行绕过</p>
+<p><code>?path=% eval("<strong>import</strong>('os')"+chr(46)+"popen('id>1')")</code></p>
+<p>注意发送的时候+要进行url编码，不然会以为是空格进行报错</p>
+<p><img src="/images/2024NCTF/dash4.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/2024NCTF/dash5.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -526,6 +584,12 @@ USER=root
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/03/30/ctfshow-web%E5%85%A5%E9%97%A8-part2/" title="ctfshow-web入门-part2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ctfshow-web入门-part2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
